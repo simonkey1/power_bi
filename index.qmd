@@ -42,7 +42,7 @@ Una vez creado el entorno virtual, actívenlo con el siguiente comando:
 
 ``` bash
 
-source "nombre-del-entorno"-env/bin/activate
+    source "nombre-del-entorno"-env/bin/activate
 
 ```
 
@@ -63,12 +63,6 @@ Primero, necesitamos importar las librerías necesarias:
     from playwright.sync_api import sync_playwright
     import pandas as pd
 ```
-
-Una vez creado el entorno virtual, actívalo:
-
-bash
-
-source "nombre-del-entorno"-env/bin/activate
 
 # 🚀 Instalar Dependencias
 
@@ -324,3 +318,22 @@ while True:
 
 -   **Ejecuta `intercept_responses()` en un bucle infinito**.
 -   **Espera 5 minutos (`time.sleep(5 * 60)`) antes de volver a ejecutar la función**.
+
+## **Felicidades⭐!**
+Ya tenemos nuestra base de datos casi lista para su visualización. Si bien podríamos terminar de darle formato a los datos directamente con pandas, es una perfecta ocasión para hacerlo en powerbi, ya que podremos visualizar con facilidad los cambios que iremos realizando para construir nuestro dashboard interactivo. 
+
+## **Aclaración 🔴**
+Este no es un tutorial de cómo utilizar PowerBI, por lo que es necesario saber lo básico para poder seguir el tutorial: instalación, configuración, comandos, etc. 
+
+## **Powerbi: carga de datos **
+Dependiendo de la carpeta donde hayamos realizado nuestro proyecto, podremos encontrar el archivo resultante, el cual utilizaremos ahora.
+
+Para poder manipular nuestros datos en Powerbi hay que seguir unos pasos sencillos:
+
+- **Abrir PowerBI**
+- **Click en Get data from other sources**
+- **Seleccionamos Text/CSV**
+- **Buscamos nuestro archivo .csv**
+- **
+
+

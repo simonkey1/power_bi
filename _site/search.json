@@ -32,14 +32,14 @@
     "href": "index.html#entorno-de-desarrollo",
     "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "Entorno de Desarrollo",
-    "text": "Entorno de Desarrollo\nPara este proyecto, necesitaremos instalar las siguientes dependencias: Playwright, Pandas y Powerbi.\nLes recomiendo crear un entorno virtual para instalar las dependencias. Para ello, decidan un directorio donde quieran crear el entorno virtual y ejecuten el siguiente comando en la terminal:\n\n python -m venv \"nombre-del-entorno\"-env\nUna vez creado el entorno virtual, actívenlo con el siguiente comando:\n\nsource \"nombre-del-entorno\"-env/bin/activate\nAhora, instalemos las dependencias necesarias:\n\n    pip install playwright pandas"
+    "text": "Entorno de Desarrollo\nPara este proyecto, necesitaremos instalar las siguientes dependencias: Playwright, Pandas y Powerbi.\nLes recomiendo crear un entorno virtual para instalar las dependencias. Para ello, decidan un directorio donde quieran crear el entorno virtual y ejecuten el siguiente comando en la terminal:\n\n python -m venv \"nombre-del-entorno\"-env\nUna vez creado el entorno virtual, actívenlo con el siguiente comando:\n\n    source \"nombre-del-entorno\"-env/bin/activate\nAhora, instalemos las dependencias necesarias:\n\n    pip install playwright pandas"
   },
   {
     "objectID": "index.html#extracción-de-los-datos",
     "href": "index.html#extracción-de-los-datos",
     "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "Extracción de los Datos",
-    "text": "Extracción de los Datos\nPrimero, necesitamos importar las librerías necesarias:\n\n    from playwright.sync_api import sync_playwright\n    import pandas as pd\nUna vez creado el entorno virtual, actívalo:\nbash\nsource “nombre-del-entorno”-env/bin/activate"
+    "text": "Extracción de los Datos\nPrimero, necesitamos importar las librerías necesarias:\n\n    from playwright.sync_api import sync_playwright\n    import pandas as pd"
   },
   {
     "objectID": "index.html#extracción-de-datos-con-playwright",
@@ -82,5 +82,33 @@
     "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "🔁 Automatización Cada 5 Minutos",
     "text": "🔁 Automatización Cada 5 Minutos\nwhile True:\n    intercept_responses()\n    print(\"⏳ Esperando 5 minutos para la siguiente ejecución...\\n\")\n    time.sleep(5 * 60)  # 5 minutos en segundos\n📌 ¿Qué hace esto?\n\nEjecuta intercept_responses() en un bucle infinito.\nEspera 5 minutos (time.sleep(5 * 60)) antes de volver a ejecutar la función."
+  },
+  {
+    "objectID": "index.html#felicidades",
+    "href": "index.html#felicidades",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "Felicidades⭐!",
+    "text": "Felicidades⭐!\nYa tenemos nuestra base de datos casi lista para su visualización. Si bien podríamos terminar de darle formato a los datos directamente con pandas, es una perfecta ocasión para hacerlo en powerbi, ya que podremos visualizar con facilidad los cambios que iremos realizando para construir nuestro dashboard interactivo."
+  },
+  {
+    "objectID": "index.html#powerbi-utilizar-nuestro-archivo-.csv",
+    "href": "index.html#powerbi-utilizar-nuestro-archivo-.csv",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "Powerbi: utilizar nuestro archivo .csv ",
+    "text": "Powerbi: utilizar nuestro archivo .csv"
+  },
+  {
+    "objectID": "index.html#aclaración",
+    "href": "index.html#aclaración",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "Aclaración 🔴",
+    "text": "Aclaración 🔴\nEste no es un tutorial de cómo utilizar PowerBI, por lo que es necesario saber lo básico para poder seguir el tutorial: instalación, configuración, comandos, etc."
+  },
+  {
+    "objectID": "index.html#powerbi-carga-de-datos",
+    "href": "index.html#powerbi-carga-de-datos",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "Powerbi: carga de datos ",
+    "text": "Powerbi: carga de datos \nDependiendo de la carpeta donde hayamos realizado nuestro proyecto, podremos encontrar el archivo resultante, el cual utilizaremos ahora.\nPara poder manipular nuestros datos en Powerbi hay que seguir unos pasos sencillos:\n\nAbrir PowerBI\nClick en Get data from other sources\nSeleccionamos Text/CSV\nBuscamos nuestro archivo .csv\n**"
   }
 ]

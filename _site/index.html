@@ -148,6 +148,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#guardado-de-datos-en-csv" id="toc-guardado-de-datos-en-csv" class="nav-link" data-scroll-target="#guardado-de-datos-en-csv">📊 <strong>Guardado de Datos en CSV</strong></a></li>
   <li><a href="#automatización-cada-5-minutos" id="toc-automatización-cada-5-minutos" class="nav-link" data-scroll-target="#automatización-cada-5-minutos">🔁 <strong>Automatización Cada 5 Minutos</strong></a></li>
+  <li><a href="#felicidades" id="toc-felicidades" class="nav-link" data-scroll-target="#felicidades"><strong>Felicidades⭐!</strong></a></li>
+  <li><a href="#aclaración" id="toc-aclaración" class="nav-link" data-scroll-target="#aclaración"><strong>Aclaración 🔴</strong></a></li>
+  <li><a href="#powerbi-carga-de-datos" id="toc-powerbi-carga-de-datos" class="nav-link" data-scroll-target="#powerbi-carga-de-datos"><strong>Powerbi: carga de datos </strong></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -206,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> python <span class="op">-</span>m venv <span class="st">"nombre-del-entorno"</span><span class="op">-</span>env</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Una vez creado el entorno virtual, actívenlo con el siguiente comando:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> <span class="st">"nombre-del-entorno"</span>-env/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">source</span> <span class="st">"nombre-del-entorno"</span>-env/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Ahora, instalemos las dependencias necesarias:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">pip</span> install playwright pandas</span>
@@ -218,9 +221,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> playwright.sync_api <span class="im">import</span> sync_playwright</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Una vez creado el entorno virtual, actívalo:</p>
-<p>bash</p>
-<p>source “nombre-del-entorno”-env/bin/activate</p>
 </section>
 <section id="instalar-dependencias" class="level1">
 <h1>🚀 Instalar Dependencias</h1>
@@ -428,6 +428,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><strong>Ejecuta <code>intercept_responses()</code> en un bucle infinito</strong>.</li>
 <li><strong>Espera 5 minutos (<code>time.sleep(5 * 60)</code>) antes de volver a ejecutar la función</strong>.</li>
+</ul>
+</section>
+<section id="felicidades" class="level2">
+<h2 class="anchored" data-anchor-id="felicidades"><strong>Felicidades⭐!</strong></h2>
+<p>Ya tenemos nuestra base de datos casi lista para su visualización. Si bien podríamos terminar de darle formato a los datos directamente con pandas, es una perfecta ocasión para hacerlo en powerbi, ya que podremos visualizar con facilidad los cambios que iremos realizando para construir nuestro dashboard interactivo.</p>
+</section>
+<section id="aclaración" class="level2">
+<h2 class="anchored" data-anchor-id="aclaración"><strong>Aclaración 🔴</strong></h2>
+<p>Este no es un tutorial de cómo utilizar PowerBI, por lo que es necesario saber lo básico para poder seguir el tutorial: instalación, configuración, comandos, etc.</p>
+</section>
+<section id="powerbi-carga-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="powerbi-carga-de-datos"><strong>Powerbi: carga de datos </strong></h2>
+<p>Dependiendo de la carpeta donde hayamos realizado nuestro proyecto, podremos encontrar el archivo resultante, el cual utilizaremos ahora.</p>
+<p>Para poder manipular nuestros datos en Powerbi hay que seguir unos pasos sencillos:</p>
+<ul>
+<li><strong>Abrir PowerBI</strong></li>
+<li><strong>Click en Get data from other sources</strong></li>
+<li><strong>Seleccionamos Text/CSV</strong></li>
+<li><strong>Buscamos nuestro archivo .csv</strong></li>
+<li>**</li>
 </ul>
 
 
