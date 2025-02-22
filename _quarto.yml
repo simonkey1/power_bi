@@ -1,0 +1,14 @@
+project:
+  type: website
+
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-overflow: scroll
+    theme:
+      # Puedes probar con un tema light y uno dark que te gusten,
+      # o dejar "default" y "default-dark" como base.
+      light: cerulean
+      dark: darkly
+    dark-mode: true         # Activa el toggle de Quarto  # Tu CSS personalizado
