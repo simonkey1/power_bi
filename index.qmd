@@ -1,5 +1,5 @@
 ---
-title: "Análisis en Tiempo Real del Suministro Eléctrico de Chile"
+title: "⚡  Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡"
 pubDate: 2025-02-12
 description: "Un tutorial de cómo extraer datos con **Playwright**, procesarlos con **Pandas** y visualizar en **PowerBI**."
 author: "Simon Gomez"

@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Análisis en Tiempo Real del Suministro Eléctrico de Chile",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "",
     "text": "Hace poco descubrí la página de la Superintendecia de Electricidad y Combustibles (SEC). Me llamó la atención en particular su sección de métricas e información de los cortes de luz a nivel nacional, debido a que noté que hay un gran margen de mejora en su accesibilidad y visualización de los datos para el usuario."
   },
@@ -16,70 +16,70 @@
   {
     "objectID": "index.html#introducción",
     "href": "index.html#introducción",
-    "title": "Análisis en Tiempo Real del Suministro Eléctrico de Chile",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "",
     "text": "Hace poco descubrí la página de la Superintendecia de Electricidad y Combustibles (SEC). Me llamó la atención en particular su sección de métricas e información de los cortes de luz a nivel nacional, debido a que noté que hay un gran margen de mejora en su accesibilidad y visualización de los datos para el usuario."
   },
   {
     "objectID": "index.html#qué-haremos",
     "href": "index.html#qué-haremos",
-    "title": "Análisis en Tiempo Real del Suministro Eléctrico de Chile",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "¿Qué haremos?",
     "text": "¿Qué haremos?\n\nPreparar nuestro entorno: primero, instalaremos las dependencias necesarias para el proyecto.\nExtracción de los datos: aprenderemos a realizar web scraping con Playwright.\nTransformación de los datos: necesitaremos limpiar y procesar los datos extraídos con Pandas.\nVisualización de los datos: finalmente, visualizaremos los datos en Powerbi."
   },
   {
     "objectID": "index.html#entorno-de-desarrollo",
     "href": "index.html#entorno-de-desarrollo",
-    "title": "Análisis en Tiempo Real del Suministro Eléctrico de Chile",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "Entorno de Desarrollo",
     "text": "Entorno de Desarrollo\nPara este proyecto, necesitaremos instalar las siguientes dependencias: Playwright, Pandas y Powerbi.\nLes recomiendo crear un entorno virtual para instalar las dependencias. Para ello, decidan un directorio donde quieran crear el entorno virtual y ejecuten el siguiente comando en la terminal:\n\n python -m venv \"nombre-del-entorno\"-env\nUna vez creado el entorno virtual, actívenlo con el siguiente comando:\n\nsource \"nombre-del-entorno\"-env/bin/activate\nAhora, instalemos las dependencias necesarias:\n\n    pip install playwright pandas"
   },
   {
     "objectID": "index.html#extracción-de-los-datos",
     "href": "index.html#extracción-de-los-datos",
-    "title": "Análisis en Tiempo Real del Suministro Eléctrico de Chile",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "Extracción de los Datos",
     "text": "Extracción de los Datos\nPrimero, necesitamos importar las librerías necesarias:\n\n    from playwright.sync_api import sync_playwright\n    import pandas as pd\nUna vez creado el entorno virtual, actívalo:\nbash\nsource “nombre-del-entorno”-env/bin/activate"
   },
   {
     "objectID": "index.html#extracción-de-datos-con-playwright",
     "href": "index.html#extracción-de-datos-con-playwright",
-    "title": "Análisis en Tiempo Real del Suministro Eléctrico de Chile",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "🔍 Extracción de Datos con Playwright",
     "text": "🔍 Extracción de Datos con Playwright\nUsaremos Playwright para interceptar las respuestas de la API de la SEC.\n\n📌 Importación de Librerías\nfrom playwright.sync_api import sync_playwright\nimport pandas as pd\nimport os\nimport time\nimport re\nfrom datetime import datetime, timedelta"
   },
   {
     "objectID": "index.html#definición-de-archivos-de-salida",
     "href": "index.html#definición-de-archivos-de-salida",
-    "title": "Análisis en Tiempo Real del Suministro Eléctrico de Chile",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "📂 Definición de Archivos de Salida",
     "text": "📂 Definición de Archivos de Salida\nGuardaremos los datos en dos archivos CSV:\n\nclientes_afectados_tiempo_real.csv: Contiene los datos más recientes.\nclientes_afectados_historico.csv: Mantiene un registro histórico.\n\ncsv_tiempo_real = \"clientes_afectados_tiempo_real.csv\"\ncsv_historico = \"clientes_afectados_historico.csv\""
   },
   {
     "objectID": "index.html#estructura-general",
     "href": "index.html#estructura-general",
-    "title": "Análisis en Tiempo Real del Suministro Eléctrico de Chile",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "📌 Estructura General",
     "text": "📌 Estructura General\n\nAbrir un navegador en modo headless (sin interfaz gráfica).\nInterceptar las respuestas de la API en la página de la SEC.\nExtraer información clave de los datos JSON recibidos.\nProcesar los datos para calcular tiempos y crear identificadores únicos.\nGuardar la información en archivos CSV.\nCerrar el navegador una vez completado el proceso."
   },
   {
     "objectID": "index.html#paso-a-paso-de-la-función",
     "href": "index.html#paso-a-paso-de-la-función",
-    "title": "Análisis en Tiempo Real del Suministro Eléctrico de Chile",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "🛠 Paso a Paso de la Función",
     "text": "🛠 Paso a Paso de la Función\n\n1️⃣ Inicializar Playwright y Abrir el Navegador\nSe utiliza sync_playwright() para iniciar Playwright y lanzar un navegador Chromium en modo headless (sin interfaz gráfica).\nwith sync_playwright() as p:\n    browser = p.chromium.launch(headless=True)  # Lanzar navegador en modo headless\n    page = browser.new_page()\n📌 ¿Qué hace esto?\n\nCrea una instancia de Playwright.\nLanza un navegador Chromium sin interfaz visual.\nCrea una nueva página en ese navegador.\n\n\n\n\n2️⃣ Definir una Lista para Almacenar Registros\nregistros = []  # Lista para almacenar datos nuevos\n📌 ¿Para qué sirve?\n\nAquí se guardarán los datos extraídos de la API antes de escribirlos en los archivos CSV.\n\n\n\n\n3️⃣ Interceptar las Respuestas de la API\ndef handle_response(response):\n    if \"GetPorFecha\" in response.url:\n        try:\n            data = response.json()\n            timestamp_actual = datetime.now()  # Tiempo de consulta\n📌 ¿Qué hace esto?\n\nVerifica si la URL de la respuesta contiene \"GetPorFecha\", lo que indica que es una respuesta de la API relevante.\nConvierte la respuesta en JSON (response.json()).\nGuarda el timestamp actual para identificar cuándo se hizo la consulta.\n\n\n\n\n4️⃣ Procesar los Datos Extraídos\nfor entry in data:\n    actualizado_hace = entry.get(\"ACTUALIZADO_HACE\", \"\")\n    minutos_atras = 0\n\n    match = re.search(r'(\\d+)\\s+Minutos', actualizado_hace)\n    if match:\n        minutos_atras = int(match.group(1))  # Extrae el número antes de \"Minutos\"\n\n    hora_exacta_reporte = timestamp_actual - timedelta(minutes=minutos_atras)\n📌 ¿Qué hace esto?\n\nExtrae el campo \"ACTUALIZADO_HACE\", que indica hace cuánto tiempo se actualizó la información.\nUsa una expresión regular (re.search) para extraer los minutos mencionados en \"ACTUALIZADO_HACE\".\nCalcula la hora exacta del reporte, restando esos minutos del timestamp actual.\n\n\n\n\n5️⃣ Crear un Identificador Único para Cada Registro\nunique_id = f\"{entry.get('FECHA_INT_STR', '')}-{entry.get('REGION', '')}-{entry.get('COMUNA', '')}-{entry.get('EMPRESA', '')}-{entry.get('CLIENTES_AFECTADOS', 0)}-{hora_exacta_reporte.strftime('%Y-%m-%d %H:%M:%S')}\"\n📌 ¿Por qué es importante esto?\n\nEvita la duplicación de datos, asegurando que cada registro tenga un ID único.\nFacilita la organización en los archivos CSV.\n\n\n\n\n6️⃣ Guardar los Datos en la Lista registros\nregistros.append({\n    \"ID_UNICO\": unique_id,\n    \"TIMESTAMP\": timestamp_actual.strftime(\"%Y-%m-%d %H:%M:%S\"),\n    \"HORA_EXACTA_REPORTE\": hora_exacta_reporte.strftime(\"%Y-%m-%d %H:%M:%S\"),\n    \"FECHA\": entry.get(\"FECHA_INT_STR\", \"\"),\n    \"REGION\": entry.get(\"NOMBRE_REGION\", \"\"),\n    \"COMUNA\": entry.get(\"NOMBRE_COMUNA\", \"\"),\n    \"EMPRESA\": entry.get(\"NOMBRE_EMPRESA\", \"\"),\n    \"CLIENTES_AFECTADOS\": entry.get(\"CLIENTES_AFECTADOS\", 0),\n    \"ACTUALIZADO_HACE\": actualizado_hace\n})\n📌 ¿Qué hace esto?\n\nGuarda cada registro como un diccionario dentro de la lista registros.\nAlmacena los datos clave como fecha, región, comuna, empresa y clientes afectados.\n\n\n\n\n7️⃣ Capturar las Respuestas de la API\npage.on(\"response\", handle_response)\n📌 ¿Qué hace esto?\n\nAsocia la función handle_response con cada respuesta de la página.\nIntercepta las respuestas en segundo plano mientras se carga la web.\n\n\n\n\n8️⃣ Acceder a la Página de la SEC\npage.goto(\"https://apps.sec.cl/INTONLINEv1/index.aspx\")\npage.wait_for_timeout(5000)  # Espera para capturar datos\n📌 ¿Qué hace esto?\n\nAbre la página de la SEC en el navegador.\nEspera 5 segundos para permitir la carga de datos.\n\n\n\n\n9️⃣ Cerrar el Navegador\nbrowser.close()\n📌 ¿Por qué es importante?\n\nLibera recursos del sistema.\nEvita que el script consuma demasiada memoria."
   },
   {
     "objectID": "index.html#guardado-de-datos-en-csv",
     "href": "index.html#guardado-de-datos-en-csv",
-    "title": "Análisis en Tiempo Real del Suministro Eléctrico de Chile",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "📊 Guardado de Datos en CSV",
     "text": "📊 Guardado de Datos en CSV\nif registros:\n    df_new = pd.DataFrame(registros)\n\n    # 📌 Guardar en CSV histórico\n    if os.path.exists(csv_historico):\n        df_historico = pd.read_csv(csv_historico, encoding=\"utf-8-sig\")\n        df_historico = pd.concat([df_historico, df_new]).drop_duplicates(subset=[\"ID_UNICO\"], keep=\"first\")\n    else:\n        df_historico = df_new\n\n    df_historico.to_csv(csv_historico, index=False, encoding=\"utf-8-sig\")\n\n    # 📌 Guardar en CSV de Tiempo Real\n    df_new.to_csv(csv_tiempo_real, index=False, encoding=\"utf-8-sig\")\n\n    print(f\"✅ Datos guardados en:\\n📌 {csv_historico} (Histórico)\\n📌 {csv_tiempo_real} (Tiempo Real)\")\n📌 ¿Qué hace esto?\n\nConvierte los registros en un DataFrame de Pandas.\nGuarda los datos en CSV histórico y de tiempo real.\nEvita duplicados basándose en el ID único."
   },
   {
     "objectID": "index.html#automatización-cada-5-minutos",
     "href": "index.html#automatización-cada-5-minutos",
-    "title": "Análisis en Tiempo Real del Suministro Eléctrico de Chile",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "🔁 Automatización Cada 5 Minutos",
     "text": "🔁 Automatización Cada 5 Minutos\nwhile True:\n    intercept_responses()\n    print(\"⏳ Esperando 5 minutos para la siguiente ejecución...\\n\")\n    time.sleep(5 * 60)  # 5 minutos en segundos\n📌 ¿Qué hace esto?\n\nEjecuta intercept_responses() en un bucle infinito.\nEspera 5 minutos (time.sleep(5 * 60)) antes de volver a ejecutar la función."
   }
