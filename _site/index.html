@@ -147,10 +147,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#cerrar-el-navegador" id="toc-cerrar-el-navegador" class="nav-link" data-scroll-target="#cerrar-el-navegador">9️⃣ <strong>Cerrar el Navegador</strong></a></li>
   </ul></li>
   <li><a href="#guardado-de-datos-en-csv" id="toc-guardado-de-datos-en-csv" class="nav-link" data-scroll-target="#guardado-de-datos-en-csv">📊 <strong>Guardado de Datos en CSV</strong></a></li>
-  <li><a href="#automatización-cada-5-minutos" id="toc-automatización-cada-5-minutos" class="nav-link" data-scroll-target="#automatización-cada-5-minutos">🔁 <strong>Automatización Cada 5 Minutos</strong></a></li>
-  <li><a href="#felicidades" id="toc-felicidades" class="nav-link" data-scroll-target="#felicidades"><strong>Felicidades⭐!</strong></a></li>
-  <li><a href="#aclaración" id="toc-aclaración" class="nav-link" data-scroll-target="#aclaración"><strong>Aclaración 🔴</strong></a></li>
-  <li><a href="#powerbi-carga-de-datos" id="toc-powerbi-carga-de-datos" class="nav-link" data-scroll-target="#powerbi-carga-de-datos"><strong>Powerbi: carga de datos </strong></a></li>
+  <li><a href="#automatización-cada-5-minutos" id="toc-automatización-cada-5-minutos" class="nav-link" data-scroll-target="#automatización-cada-5-minutos">🔁 <strong>Automatización Cada 5 Minutos</strong></a>
+  <ul class="collapse">
+  <li><a href="#felicidades" id="toc-felicidades" class="nav-link" data-scroll-target="#felicidades">Felicidades⭐!</a></li>
+  <li><a href="#aclaración" id="toc-aclaración" class="nav-link" data-scroll-target="#aclaración">Aclaración 🔴</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#powerbi-transformación-y-visualización-de-los-datos" id="toc-powerbi-transformación-y-visualización-de-los-datos" class="nav-link" data-scroll-target="#powerbi-transformación-y-visualización-de-los-datos">Powerbi: transformación y Visualización de los datos</a>
+  <ul class="collapse">
+  <li><a href="#nueva-columna-región-corregida" id="toc-nueva-columna-región-corregida" class="nav-link" data-scroll-target="#nueva-columna-región-corregida"><strong>Nueva columna región corregida</strong></a></li>
+  <li><a href="#hola" id="toc-hola" class="nav-link" data-scroll-target="#hola">Hola</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -429,26 +435,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Ejecuta <code>intercept_responses()</code> en un bucle infinito</strong>.</li>
 <li><strong>Espera 5 minutos (<code>time.sleep(5 * 60)</code>) antes de volver a ejecutar la función</strong>.</li>
 </ul>
-</section>
-<section id="felicidades" class="level2">
-<h2 class="anchored" data-anchor-id="felicidades"><strong>Felicidades⭐!</strong></h2>
+<section id="felicidades" class="level3">
+<h3 class="anchored" data-anchor-id="felicidades">Felicidades⭐!</h3>
 <p>Ya tenemos nuestra base de datos casi lista para su visualización. Si bien podríamos terminar de darle formato a los datos directamente con pandas, es una perfecta ocasión para hacerlo en powerbi, ya que podremos visualizar con facilidad los cambios que iremos realizando para construir nuestro dashboard interactivo.</p>
 </section>
-<section id="aclaración" class="level2">
-<h2 class="anchored" data-anchor-id="aclaración"><strong>Aclaración 🔴</strong></h2>
+<section id="aclaración" class="level3">
+<h3 class="anchored" data-anchor-id="aclaración">Aclaración 🔴</h3>
 <p>Este no es un tutorial de cómo utilizar PowerBI, por lo que es necesario saber lo básico para poder seguir el tutorial: instalación, configuración, comandos, etc.</p>
 </section>
-<section id="powerbi-carga-de-datos" class="level2">
-<h2 class="anchored" data-anchor-id="powerbi-carga-de-datos"><strong>Powerbi: carga de datos </strong></h2>
+</section>
+</section>
+<section id="powerbi-transformación-y-visualización-de-los-datos" class="level1">
+<h1>Powerbi: transformación y Visualización de los datos</h1>
 <p>Dependiendo de la carpeta donde hayamos realizado nuestro proyecto, podremos encontrar el archivo resultante, el cual utilizaremos ahora.</p>
-<p>Para poder manipular nuestros datos en Powerbi hay que seguir unos pasos sencillos:</p>
+<p>Para poder manipular nuestros datos en Powerbi hay que seguir estos sencillos pasos:</p>
 <ul>
 <li><strong>Abrir PowerBI</strong></li>
 <li><strong>Click en Get data from other sources</strong></li>
 <li><strong>Seleccionamos Text/CSV</strong></li>
 <li><strong>Buscamos nuestro archivo .csv</strong></li>
-<li>**</li>
 </ul>
+<p>Una vez realizado estos pasos, nos aparecerá una ventana emergente, donde presionaremos en Transform Data. A través de esta hoja de cálculo podremos completar los requerimientos para poder visualizar nuestro mapa de Chile por regiones. Estos son:</p>
+<ul>
+<li><strong>Ordenar de mayor a menor los cortes de luz</strong></li>
+<li><strong>Construir una nueva columna llamada Region_Corregida a partir de nuestra variable región</strong></li>
+<li><strong>Renombrar cada región de esta columna con los nombres del archivo topojson(mapa)</strong></li>
+</ul>
+<p>Para ordenar de manera descendiente los clientes afectados, los pasos son similares a excel:</p>
+<ul>
+<li><strong>Click en la columna clientes_afectados</strong></li>
+<li><strong>Ordenar de mayor a menor</strong></li>
+<li><strong>Cerramos el menú</strong></li>
+</ul>
+<section id="nueva-columna-región-corregida" class="level2">
+<h2 class="anchored" data-anchor-id="nueva-columna-región-corregida"><strong>Nueva columna región corregida</strong></h2>
+<p>En el menú principal buscamos la sección Add column, y clickeamos en Custom column, Luego ponemos el siguiente código:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode m code-with-copy"><code class="sourceCode matlab"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">=</span> <span class="va">Table</span>.<span class="va">AddColumn</span>(#<span class="st">"Sorted Rows"</span><span class="op">,</span> <span class="st">"Region_Corregida"</span><span class="op">,</span> <span class="va">each</span> <span class="st">"Región de "</span> <span class="op">&amp;</span> [<span class="va">REGION</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>📌 <strong>¿Qué hace esto?</strong></p>
+<ul>
+<li><strong>Table.AddColumn → Función que agrega una nueva columna a una tabla existente.</strong></li>
+<li><strong>#“Sorted Rows” → Nombre de nuestra base ya ordenada (paso anterior) en la que se está agregando la nueva columna.</strong></li>
+<li><strong>“Region_Corregida” → Nombre de la nueva columna que se está creando.</strong></li>
+<li><strong>each “Región de” &amp; [REGION] → Expresión que se evalúa para cada fila:</strong></li>
+<li><strong>“Región de” → Texto fijo.</strong></li>
+<li><strong>[REGION] → Columna existente en la tabla, cuyos valores se concatenan con el texto fijo.</strong></li>
+</ul>
+</section>
+<section id="hola" class="level2">
+<h2 class="anchored" data-anchor-id="hola">Hola</h2>
 
 
 </section>

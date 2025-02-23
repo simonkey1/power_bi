@@ -81,7 +81,7 @@
     "href": "index.html#automatización-cada-5-minutos",
     "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "🔁 Automatización Cada 5 Minutos",
-    "text": "🔁 Automatización Cada 5 Minutos\nwhile True:\n    intercept_responses()\n    print(\"⏳ Esperando 5 minutos para la siguiente ejecución...\\n\")\n    time.sleep(5 * 60)  # 5 minutos en segundos\n📌 ¿Qué hace esto?\n\nEjecuta intercept_responses() en un bucle infinito.\nEspera 5 minutos (time.sleep(5 * 60)) antes de volver a ejecutar la función."
+    "text": "🔁 Automatización Cada 5 Minutos\nwhile True:\n    intercept_responses()\n    print(\"⏳ Esperando 5 minutos para la siguiente ejecución...\\n\")\n    time.sleep(5 * 60)  # 5 minutos en segundos\n📌 ¿Qué hace esto?\n\nEjecuta intercept_responses() en un bucle infinito.\nEspera 5 minutos (time.sleep(5 * 60)) antes de volver a ejecutar la función.\n\n\nFelicidades⭐!\nYa tenemos nuestra base de datos casi lista para su visualización. Si bien podríamos terminar de darle formato a los datos directamente con pandas, es una perfecta ocasión para hacerlo en powerbi, ya que podremos visualizar con facilidad los cambios que iremos realizando para construir nuestro dashboard interactivo.\n\n\nAclaración 🔴\nEste no es un tutorial de cómo utilizar PowerBI, por lo que es necesario saber lo básico para poder seguir el tutorial: instalación, configuración, comandos, etc."
   },
   {
     "objectID": "index.html#felicidades",
@@ -102,13 +102,27 @@
     "href": "index.html#aclaración",
     "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "Aclaración 🔴",
-    "text": "Aclaración 🔴\nEste no es un tutorial de cómo utilizar PowerBI, por lo que es necesario saber lo básico para poder seguir el tutorial: instalación, configuración, comandos, etc."
+    "text": "Aclaración 🔴\nEste no es un tutorial de cómo utilizar PowerBI, por lo que es necesario saber lo básico para poder seguir el tutorial: instalación, configuración, comandos, etc.\n\nPowerbi: carga de datos \nDependiendo de la carpeta donde hayamos realizado nuestro proyecto, podremos encontrar el archivo resultante, el cual utilizaremos ahora.\nPara poder manipular nuestros datos en Powerbi hay que seguir unos pasos sencillos:\n\nAbrir PowerBI\nClick en Get data from other sources\nSeleccionamos Text/CSV\nBuscamos nuestro archivo .csv\n\nUna vez realizado estos pasos, nos aparecerá una ventana emergente, donde presionaremos en Transform Data. A través de esta hoja de cálculo podremos completar los requerimientos para poder visualizar nuestro mapa de Chile por regiones. Estos son:\n\nOrdenar de mayor a menor los cortes de luz\nConstruir una nueva columna llamada Region_Corregida a partir de nuestra variable región\nRenombrar cada región de esta columna con los nombres del archivo topojson(mapa)\n\nPara ordenar de manera descendiente los clientes afectados, los pasos son similares a excel:\n\nClick en la columna clientes_afectados\nOrdenar de mayor a menor\nCerramos el menú"
   },
   {
     "objectID": "index.html#powerbi-carga-de-datos",
     "href": "index.html#powerbi-carga-de-datos",
     "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
-    "section": "Powerbi: carga de datos ",
-    "text": "Powerbi: carga de datos \nDependiendo de la carpeta donde hayamos realizado nuestro proyecto, podremos encontrar el archivo resultante, el cual utilizaremos ahora.\nPara poder manipular nuestros datos en Powerbi hay que seguir unos pasos sencillos:\n\nAbrir PowerBI\nClick en Get data from other sources\nSeleccionamos Text/CSV\nBuscamos nuestro archivo .csv\n**"
+    "section": "Powerbi: carga de datos",
+    "text": "Powerbi: carga de datos\nDependiendo de la carpeta donde hayamos realizado nuestro proyecto, podremos encontrar el archivo resultante, el cual utilizaremos ahora.\nPara poder manipular nuestros datos en Powerbi hay que seguir unos pasos sencillos:\n\nAbrir PowerBI\nClick en Get data from other sources\nSeleccionamos Text/CSV\nBuscamos nuestro archivo .csv\n\nUna vez realizado estos pasos, nos aparecerá una ventana emergente, donde presionaremos en Transform Data. A través de esta hoja de cálculo podremos completar los requerimientos para poder visualizar nuestro mapa de Chile por regiones. Estos son:\n\nOrdenar de mayor a menor los cortes de luz\nConstruir una nueva columna llamada Region_Corregida a partir de nuestra variable región\nRenombrar cada región de esta columna con los nombres del archivo topojson(mapa)\n\nPara ordenar de manera descendiente los clientes afectados, los pasos son similares a excel:\n\nClick en la columna clientes_afectados\nOrdenar de mayor a menor\nCerramos el menú\n\n\nNueva columna región corregida\nEn el menú principal buscamos la sección Add column, y clickeamos en Custom column, Luego ponemos el siguiente código:\n= Table.AddColumn(#\"Sorted Rows\", \"Region_Corregida\", each \"Región de \" & [REGION])\n\n📌 ¿Qué hace esto?\n\nTable.AddColumn → Función que agrega una nueva columna a una tabla existente.\n#“Sorted Rows” → Nombre de nuestra base ya ordenada (paso anterior) en la que se está agregando la nueva columna.\n“Region_Corregida” → Nombre de la nueva columna que se está creando.\neach “Región de” & [REGION] → Expresión que se evalúa para cada fila:\n“Región de” → Texto fijo.\n[REGION] → Columna existente en la tabla, cuyos valores se concatenan con el texto fijo.\n\n\n\nHola"
+  },
+  {
+    "objectID": "index.html#nueva-columna-región-corregida",
+    "href": "index.html#nueva-columna-región-corregida",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "Nueva columna región corregida",
+    "text": "Nueva columna región corregida\nEn el menú principal buscamos la sección Add column, y clickeamos en Custom column, Luego ponemos el siguiente código:\n= Table.AddColumn(#\"Sorted Rows\", \"Region_Corregida\", each \"Región de \" & [REGION])\n📌 ¿Qué hace esto?\n\nTable.AddColumn → Función que agrega una nueva columna a una tabla existente.\n#“Sorted Rows” → Nombre de nuestra base ya ordenada (paso anterior) en la que se está agregando la nueva columna.\n“Region_Corregida” → Nombre de la nueva columna que se está creando.\neach “Región de” & [REGION] → Expresión que se evalúa para cada fila:\n“Región de” → Texto fijo.\n[REGION] → Columna existente en la tabla, cuyos valores se concatenan con el texto fijo."
+  },
+  {
+    "objectID": "index.html#hola",
+    "href": "index.html#hola",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "Hola",
+    "text": "Hola"
   }
 ]

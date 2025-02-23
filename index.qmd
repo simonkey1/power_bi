@@ -319,21 +319,51 @@ while True:
 -   **Ejecuta `intercept_responses()` en un bucle infinito**.
 -   **Espera 5 minutos (`time.sleep(5 * 60)`) antes de volver a ejecutar la función**.
 
-## **Felicidades⭐!**
+### Felicidades⭐!
 Ya tenemos nuestra base de datos casi lista para su visualización. Si bien podríamos terminar de darle formato a los datos directamente con pandas, es una perfecta ocasión para hacerlo en powerbi, ya que podremos visualizar con facilidad los cambios que iremos realizando para construir nuestro dashboard interactivo. 
 
-## **Aclaración 🔴**
+### Aclaración 🔴
 Este no es un tutorial de cómo utilizar PowerBI, por lo que es necesario saber lo básico para poder seguir el tutorial: instalación, configuración, comandos, etc. 
 
-## **Powerbi: carga de datos **
+#  Powerbi: transformación y Visualización de los datos 
 Dependiendo de la carpeta donde hayamos realizado nuestro proyecto, podremos encontrar el archivo resultante, el cual utilizaremos ahora.
 
-Para poder manipular nuestros datos en Powerbi hay que seguir unos pasos sencillos:
+Para poder manipular nuestros datos en Powerbi hay que seguir estos sencillos pasos:
 
 - **Abrir PowerBI**
 - **Click en Get data from other sources**
 - **Seleccionamos Text/CSV**
 - **Buscamos nuestro archivo .csv**
-- **
+
+Una vez realizado estos pasos, nos aparecerá una ventana emergente, donde presionaremos en Transform Data. A través de esta hoja de cálculo podremos completar los requerimientos para poder visualizar nuestro mapa de Chile por regiones. Estos son:
+
+- **Ordenar de mayor a menor los cortes de luz**
+- **Construir una nueva columna llamada Region_Corregida a partir de nuestra variable región**
+- **Renombrar cada región de esta columna con los nombres del archivo topojson(mapa)**
+
+Para ordenar de manera descendiente los clientes afectados, los pasos son similares a excel:
+
+- **Click en la columna clientes_afectados**
+- **Ordenar de mayor a menor**
+- **Cerramos el menú**
+
+## **Nueva columna región corregida** 
+
+En el menú principal buscamos la sección Add column, y clickeamos en Custom column, Luego ponemos el siguiente código:
 
 
+```M
+= Table.AddColumn(#"Sorted Rows", "Region_Corregida", each "Región de " & [REGION])
+
+``` 
+
+📌 **¿Qué hace esto?**
+
+ - **Table.AddColumn → Función que agrega una nueva columna a una tabla existente.**
+ - **#"Sorted Rows" → Nombre de nuestra base ya ordenada (paso anterior) en la que se está agregando la nueva columna.**
+ - **"Region_Corregida" → Nombre de la nueva columna que se está creando.**
+ - **each "Región de " & [REGION] → Expresión que se evalúa para cada fila:**
+ - **"Región de " → Texto fijo.**
+ - **[REGION] → Columna existente en la tabla, cuyos valores se concatenan con el texto fijo.**
+
+## Hola 
