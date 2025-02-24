@@ -153,10 +153,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#aclaración" id="toc-aclaración" class="nav-link" data-scroll-target="#aclaración">Aclaración 🔴</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#powerbi-transformación-y-visualización-de-los-datos" id="toc-powerbi-transformación-y-visualización-de-los-datos" class="nav-link" data-scroll-target="#powerbi-transformación-y-visualización-de-los-datos">Powerbi: transformación y Visualización de los datos</a>
+  <li><a href="#powerbi-transformación-y-visualización-de-los-datos" id="toc-powerbi-transformación-y-visualización-de-los-datos" class="nav-link" data-scroll-target="#powerbi-transformación-y-visualización-de-los-datos">Powerbi: transformación y Visualización de los datos</a></li>
+  <li><a href="#código-m" id="toc-código-m" class="nav-link" data-scroll-target="#código-m">Código M</a>
   <ul class="collapse">
-  <li><a href="#nueva-columna-región-corregida" id="toc-nueva-columna-región-corregida" class="nav-link" data-scroll-target="#nueva-columna-región-corregida"><strong>Nueva columna región corregida</strong></a></li>
-  <li><a href="#hola" id="toc-hola" class="nav-link" data-scroll-target="#hola">Hola</a></li>
+  <li><a href="#explicación-del-código-m" id="toc-explicación-del-código-m" class="nav-link" data-scroll-target="#explicación-del-código-m">Explicación del código M</a></li>
+  <li><a href="#cargar-el-archivo-csv-y-promover-encabezados" id="toc-cargar-el-archivo-csv-y-promover-encabezados" class="nav-link" data-scroll-target="#cargar-el-archivo-csv-y-promover-encabezados">📌 Cargar el Archivo CSV y Promover Encabezados</a></li>
+  <li><a href="#cambiar-tipos-de-datos" id="toc-cambiar-tipos-de-datos" class="nav-link" data-scroll-target="#cambiar-tipos-de-datos">📌 Cambiar Tipos de Datos</a></li>
+  <li><a href="#agregar-una-columna-personalizada" id="toc-agregar-una-columna-personalizada" class="nav-link" data-scroll-target="#agregar-una-columna-personalizada">📌 Agregar una Columna Personalizada</a></li>
+  <li><a href="#aplicar-reemplazos-de-forma-acumulativa" id="toc-aplicar-reemplazos-de-forma-acumulativa" class="nav-link" data-scroll-target="#aplicar-reemplazos-de-forma-acumulativa">📌 Aplicar Reemplazos de Forma Acumulativa</a>
+  <ul class="collapse">
+  <li><a href="#definición-de-la-lista-de-reemplazos" id="toc-definición-de-la-lista-de-reemplazos" class="nav-link" data-scroll-target="#definición-de-la-lista-de-reemplazos">Definición de la Lista de Reemplazos</a></li>
+  <li><a href="#aplicación-de-los-reemplazos-con-list.accumulate" id="toc-aplicación-de-los-reemplazos-con-list.accumulate" class="nav-link" data-scroll-target="#aplicación-de-los-reemplazos-con-list.accumulate">Aplicación de los Reemplazos con List.Accumulate</a></li>
+  </ul></li>
+  <li><a href="#construcción-de-métricas-el-mapa-interactivo-y-gráficos" id="toc-construcción-de-métricas-el-mapa-interactivo-y-gráficos" class="nav-link" data-scroll-target="#construcción-de-métricas-el-mapa-interactivo-y-gráficos">Construcción de métricas, el mapa interactivo y gráficos</a>
+  <ul class="collapse">
+  <li><a href="#medidas" id="toc-medidas" class="nav-link" data-scroll-target="#medidas">Medidas</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -212,10 +224,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Para este proyecto, necesitaremos instalar las siguientes dependencias: Playwright, Pandas y Powerbi.</p>
 <p>Les recomiendo crear un entorno virtual para instalar las dependencias. Para ello, decidan un directorio donde quieran crear el entorno virtual y ejecuten el siguiente comando en la terminal:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> python <span class="op">-</span>m venv <span class="st">"nombre-del-entorno"</span><span class="op">-</span>env</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    python <span class="op">-</span>m venv <span class="st">"nombre-del-entorno"</span><span class="op">-</span>env</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Una vez creado el entorno virtual, actívenlo con el siguiente comando:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">source</span> <span class="st">"nombre-del-entorno"</span>-env/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">source</span> <span class="st">"nombre-del-entorno"</span>-env/bin/activate</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Ahora, instalemos las dependencias necesarias:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">pip</span> install playwright pandas</span>
@@ -231,9 +245,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="instalar-dependencias" class="level1">
 <h1>🚀 Instalar Dependencias</h1>
 <p>Con el entorno virtual activado, instalemos las librerías necesarias:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install playwright pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">pip</span> install playwright pandas</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Además, debemos instalar los navegadores de Playwright:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">playwright</span> install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">playwright</span> install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 <section id="extracción-de-datos-con-playwright" class="level2">
 <h2 class="anchored" data-anchor-id="extracción-de-datos-con-playwright">🔍 Extracción de Datos con Playwright</h2>
@@ -450,41 +467,266 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Dependiendo de la carpeta donde hayamos realizado nuestro proyecto, podremos encontrar el archivo resultante, el cual utilizaremos ahora.</p>
 <p>Para poder manipular nuestros datos en Powerbi hay que seguir estos sencillos pasos:</p>
 <ul>
-<li><strong>Abrir PowerBI</strong></li>
-<li><strong>Click en Get data from other sources</strong></li>
+<li><p><strong>Abrir PowerBI</strong></p></li>
+<li><p><strong>Click en Get data from other sources</strong></p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/get_data.png" class="img-fluid figure-img"></p>
+<figcaption>Figura 1</figcaption>
+</figure>
+</div>
+<ul>
 <li><strong>Seleccionamos Text/CSV</strong></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/select_csv.png" class="img-fluid figure-img"></p>
+<figcaption>Figura 3</figcaption>
+</figure>
+</div>
+<ul>
 <li><strong>Buscamos nuestro archivo .csv</strong></li>
 </ul>
-<p>Una vez realizado estos pasos, nos aparecerá una ventana emergente, donde presionaremos en Transform Data. A través de esta hoja de cálculo podremos completar los requerimientos para poder visualizar nuestro mapa de Chile por regiones. Estos son:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Text_csv.png" class="img-fluid figure-img"></p>
+<figcaption>Figura 3</figcaption>
+</figure>
+</div>
 <ul>
-<li><strong>Ordenar de mayor a menor los cortes de luz</strong></li>
-<li><strong>Construir una nueva columna llamada Region_Corregida a partir de nuestra variable región</strong></li>
-<li><strong>Renombrar cada región de esta columna con los nombres del archivo topojson(mapa)</strong></li>
+<li><strong>Click en Load</strong></li>
 </ul>
-<p>Para ordenar de manera descendiente los clientes afectados, los pasos son similares a excel:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/load_data.png" class="img-fluid figure-img"></p>
+<figcaption>Figura 4</figcaption>
+</figure>
+</div>
+<p>A continuación explicaré paso a paso el código M que utilizamos para transformar datos en Power Query. Este script carga nuestro archivo CSV, promociona los encabezados, cambia los tipos de datos, agrega una columna personalizada concatenando un texto fijo con el valor existente en la columna <strong>REGION</strong>, y aplica una serie de reemplazos para corregir los nombres de las regiones de forma automatizada.</p>
 <ul>
-<li><strong>Click en la columna clientes_afectados</strong></li>
-<li><strong>Ordenar de mayor a menor</strong></li>
-<li><strong>Cerramos el menú</strong></li>
+<li><strong>En la sección Home click en Advanced Editor</strong></li>
 </ul>
-<section id="nueva-columna-región-corregida" class="level2">
-<h2 class="anchored" data-anchor-id="nueva-columna-región-corregida"><strong>Nueva columna región corregida</strong></h2>
-<p>En el menú principal buscamos la sección Add column, y clickeamos en Custom column, Luego ponemos el siguiente código:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode m code-with-copy"><code class="sourceCode matlab"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">=</span> <span class="va">Table</span>.<span class="va">AddColumn</span>(#<span class="st">"Sorted Rows"</span><span class="op">,</span> <span class="st">"Region_Corregida"</span><span class="op">,</span> <span class="va">each</span> <span class="st">"Región de "</span> <span class="op">&amp;</span> [<span class="va">REGION</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>📌 <strong>¿Qué hace esto?</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Advance_editor.png" class="img-fluid figure-img"></p>
+<figcaption>Figura 4</figcaption>
+</figure>
+</div>
 <ul>
-<li><strong>Table.AddColumn → Función que agrega una nueva columna a una tabla existente.</strong></li>
-<li><strong>#“Sorted Rows” → Nombre de nuestra base ya ordenada (paso anterior) en la que se está agregando la nueva columna.</strong></li>
-<li><strong>“Region_Corregida” → Nombre de la nueva columna que se está creando.</strong></li>
-<li><strong>each “Región de” &amp; [REGION] → Expresión que se evalúa para cada fila:</strong></li>
-<li><strong>“Región de” → Texto fijo.</strong></li>
-<li><strong>[REGION] → Columna existente en la tabla, cuyos valores se concatenan con el texto fijo.</strong></li>
+<li><p><strong>Copia y pega el código de más abajo</strong></p></li>
+<li><p><strong>Click en Done</strong></p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Code_M.png" class="img-fluid figure-img"></p>
+<figcaption>Figura 4</figcaption>
+</figure>
+</div>
+</section>
+<section id="código-m" class="level1">
+<h1>Código M</h1>
+<div class="sourceCode" id="cb20"><pre class="sourceCode m code-with-copy"><code class="sourceCode matlab"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="va">let</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">//</span> <span class="va">Cargar</span> <span class="va">archivo</span> <span class="va">CSV</span> <span class="va">y</span> <span class="va">promover</span> <span class="va">encabezados</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">Source</span> <span class="op">=</span> <span class="va">Csv</span>.<span class="va">Document</span>(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">File</span>.<span class="va">Contents</span>(<span class="st">"C:\Users\SIMON\Desktop\Kaggle\luz\power_bi\clientes_afectados_tiempo_real.csv"</span>)<span class="op">,</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        [<span class="va">Delimiter</span><span class="op">=</span><span class="st">","</span><span class="op">,</span> <span class="va">Columns</span><span class="op">=</span><span class="fl">9</span><span class="op">,</span> <span class="va">Encoding</span><span class="op">=</span><span class="fl">65001</span><span class="op">,</span> <span class="va">QuoteStyle</span><span class="op">=</span><span class="va">QuoteStyle</span>.<span class="va">None</span>]</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    )<span class="op">,</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    #<span class="st">"Promoted Headers"</span> <span class="op">=</span> <span class="va">Table</span>.<span class="va">PromoteHeaders</span>(<span class="va">Source</span><span class="op">,</span> [<span class="va">PromoteAllScalars</span><span class="op">=</span><span class="va">true</span>])<span class="op">,</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">//</span> <span class="va">Cambiar</span> <span class="va">tipos</span> <span class="va">de</span> <span class="va">datos</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    #<span class="st">"Changed Type"</span> <span class="op">=</span> <span class="va">Table</span>.<span class="va">TransformColumnTypes</span>(</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>        #<span class="st">"Promoted Headers"</span><span class="op">,</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"ID_UNICO"</span><span class="op">,</span> <span class="va">type</span> <span class="va">text</span>}<span class="op">,</span> </span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"TIMESTAMP"</span><span class="op">,</span> <span class="va">type</span> <span class="va">datetime</span>}<span class="op">,</span> </span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"HORA_EXACTA_REPORTE"</span><span class="op">,</span> <span class="va">type</span> <span class="va">datetime</span>}<span class="op">,</span> </span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"FECHA"</span><span class="op">,</span> <span class="va">type</span> <span class="va">date</span>}<span class="op">,</span> </span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"REGION"</span><span class="op">,</span> <span class="va">type</span> <span class="va">text</span>}<span class="op">,</span> </span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"COMUNA"</span><span class="op">,</span> <span class="va">type</span> <span class="va">text</span>}<span class="op">,</span> </span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"EMPRESA"</span><span class="op">,</span> <span class="va">type</span> <span class="va">text</span>}<span class="op">,</span> </span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"CLIENTES_AFECTADOS"</span><span class="op">,</span> <span class="va">Int64</span>.<span class="va">Type</span>}<span class="op">,</span> </span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"ACTUALIZADO_HACE"</span><span class="op">,</span> <span class="va">type</span> <span class="va">text</span>}</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    )<span class="op">,</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">//</span> <span class="va">Agregar</span> <span class="va">columna</span> <span class="va">REGION_CORREGIDA</span> <span class="va">concatenando</span> <span class="st">"Región de "</span> <span class="va">con</span> <span class="va">el</span> <span class="va">valor</span> <span class="va">de</span> <span class="va">REGION</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    #<span class="st">"Added Custom"</span> <span class="op">=</span> <span class="va">Table</span>.<span class="va">AddColumn</span>(</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>        #<span class="st">"Changed Type"</span><span class="op">,</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">"REGION_CORREGIDA"</span><span class="op">,</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>        <span class="va">each</span> <span class="st">"Región de "</span> <span class="op">&amp;</span> [<span class="va">REGION</span>]</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>    )<span class="op">,</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">//</span> <span class="va">Lista</span> <span class="va">de</span> <span class="va">reemplazos</span> <span class="va">para</span> <span class="va">la</span> <span class="va">columna</span> <span class="va">REGION_CORREGIDA</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    <span class="va">Reemplazos</span> <span class="op">=</span> {</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"Región de Metropolitana"</span><span class="op">,</span> <span class="st">"Región Metropolitana de Santiago"</span>}<span class="op">,</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"Región de Tarapaca"</span><span class="op">,</span> <span class="st">"Región de Tarapacá"</span>}<span class="op">,</span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"Región de Magallanes"</span><span class="op">,</span> <span class="st">"Región de Magallanes y Antártica Chilena"</span>}<span class="op">,</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"Región de Aysén"</span><span class="op">,</span> <span class="st">"Región de Aysén del Gral.Ibañez del Campo"</span>}<span class="op">,</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"Región de O`Higgins"</span><span class="op">,</span> <span class="st">"Región del Libertador Bernardo O'Higgins"</span>}<span class="op">,</span></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"Región de Biobio"</span><span class="op">,</span> <span class="st">"Región del Bío-Bío"</span>}<span class="op">,</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"Región de La Araucania"</span><span class="op">,</span> <span class="st">"Región de La Araucanía"</span>}<span class="op">,</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"Región de Los Rios"</span><span class="op">,</span> <span class="st">"Región de los Ríos"</span>}<span class="op">,</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"Región de Valparaiso"</span><span class="op">,</span> <span class="st">"Región de Valparaíso"</span>}<span class="op">,</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"Región de Maule"</span><span class="op">,</span> <span class="st">"Región del Maule"</span>}</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>    <span class="op">//</span> <span class="va">Aplicar</span> <span class="va">reemplazos</span> <span class="va">a</span> <span class="va">REGION_CORREGIDA</span> <span class="va">de</span> <span class="va">forma</span> <span class="va">acumulativa</span></span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>    <span class="va">Resultado</span> <span class="op">=</span> <span class="va">List</span>.<span class="va">Accumulate</span>(</span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>        <span class="va">Reemplazos</span><span class="op">,</span></span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>        #<span class="st">"Added Custom"</span><span class="op">,</span></span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>        (<span class="va">tabla</span><span class="op">,</span> <span class="va">par</span>) <span class="op">=&gt;</span> <span class="va">Table</span>.<span class="va">ReplaceValue</span>(</span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>            <span class="va">tabla</span><span class="op">,</span></span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>            <span class="va">par</span>{<span class="fl">0</span>}<span class="op">,</span></span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>            <span class="va">par</span>{<span class="fl">1</span>}<span class="op">,</span></span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>            <span class="va">Replacer</span>.<span class="va">ReplaceText</span><span class="op">,</span></span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"REGION_CORREGIDA"</span>}</span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a><span class="va">in</span></span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>    <span class="va">Resultado</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="explicación-del-código-m" class="level2">
+<h2 class="anchored" data-anchor-id="explicación-del-código-m">Explicación del código M</h2>
+<p>A continuación, desglosamos cada parte del código para comprender su funcionamiento.</p>
+<hr>
+</section>
+<section id="cargar-el-archivo-csv-y-promover-encabezados" class="level2">
+<h2 class="anchored" data-anchor-id="cargar-el-archivo-csv-y-promover-encabezados">📌 Cargar el Archivo CSV y Promover Encabezados</h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode m code-with-copy"><code class="sourceCode matlab"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="va">Source</span> <span class="op">=</span> <span class="va">Csv</span>.<span class="va">Document</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">File</span>.<span class="va">Contents</span>(<span class="st">"C:\Users\SIMON\Desktop\Kaggle\luz\power_bi\clientes_afectados_tiempo_real.csv"</span>)<span class="op">,</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    [<span class="va">Delimiter</span><span class="op">=</span><span class="st">","</span><span class="op">,</span> <span class="va">Columns</span><span class="op">=</span><span class="fl">9</span><span class="op">,</span> <span class="va">Encoding</span><span class="op">=</span><span class="fl">65001</span><span class="op">,</span> <span class="va">QuoteStyle</span><span class="op">=</span><span class="va">QuoteStyle</span>.<span class="va">None</span>]</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>)<span class="op">,</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>#<span class="st">"Promoted Headers"</span> <span class="op">=</span> <span class="va">Table</span>.<span class="va">PromoteHeaders</span>(<span class="va">Source</span><span class="op">,</span> [<span class="va">PromoteAllScalars</span><span class="op">=</span><span class="va">true</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>¿Qué hace esto?</strong></p>
+<ul>
+<li><strong>Csv.Document &amp; File.Contents:</strong> Carga el archivo CSV desde la ruta especificada.</li>
+<li><strong>Table.PromoteHeaders:</strong> Convierte la primera fila en los nombres de columna, facilitando la manipulación posterior.</li>
+</ul>
+<hr>
+</section>
+<section id="cambiar-tipos-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="cambiar-tipos-de-datos">📌 Cambiar Tipos de Datos</h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode m code-with-copy"><code class="sourceCode matlab"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>#<span class="st">"Changed Type"</span> <span class="op">=</span> <span class="va">Table</span>.<span class="va">TransformColumnTypes</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    #<span class="st">"Promoted Headers"</span><span class="op">,</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"ID_UNICO"</span><span class="op">,</span> <span class="va">type</span> <span class="va">text</span>}<span class="op">,</span> </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"TIMESTAMP"</span><span class="op">,</span> <span class="va">type</span> <span class="va">datetime</span>}<span class="op">,</span> </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"HORA_EXACTA_REPORTE"</span><span class="op">,</span> <span class="va">type</span> <span class="va">datetime</span>}<span class="op">,</span> </span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"FECHA"</span><span class="op">,</span> <span class="va">type</span> <span class="va">date</span>}<span class="op">,</span> </span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"REGION"</span><span class="op">,</span> <span class="va">type</span> <span class="va">text</span>}<span class="op">,</span> </span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"COMUNA"</span><span class="op">,</span> <span class="va">type</span> <span class="va">text</span>}<span class="op">,</span> </span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"EMPRESA"</span><span class="op">,</span> <span class="va">type</span> <span class="va">text</span>}<span class="op">,</span> </span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"CLIENTES_AFECTADOS"</span><span class="op">,</span> <span class="va">Int64</span>.<span class="va">Type</span>}<span class="op">,</span> </span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"ACTUALIZADO_HACE"</span><span class="op">,</span> <span class="va">type</span> <span class="va">text</span>}</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>¿Qué hace esto?</strong></p>
+<ul>
+<li>Se establecen los tipos de datos adecuados para cada columna, lo que es crucial para evitar errores y asegurar que los cálculos o transformaciones posteriores se realicen correctamente.</li>
+</ul>
+<hr>
+</section>
+<section id="agregar-una-columna-personalizada" class="level2">
+<h2 class="anchored" data-anchor-id="agregar-una-columna-personalizada">📌 Agregar una Columna Personalizada</h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode m code-with-copy"><code class="sourceCode matlab"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>#<span class="st">"Added Custom"</span> <span class="op">=</span> <span class="va">Table</span>.<span class="va">AddColumn</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    #<span class="st">"Changed Type"</span><span class="op">,</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"REGION_CORREGIDA"</span><span class="op">,</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">each</span> <span class="st">"Región de "</span> <span class="op">&amp;</span> [<span class="va">REGION</span>]</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>¿Qué hace esto?</strong></p>
+<ul>
+<li><strong>Table.AddColumn:</strong> Agrega una nueva columna a la tabla.</li>
+<li><strong>“REGION_CORREGIDA”:</strong> Es el nombre de la nueva columna.</li>
+<li><strong>each “Región de” &amp; [REGION]:</strong> Para cada fila, concatena el texto fijo <code>"Región de "</code> con el valor existente en la columna <strong>REGION</strong>.</li>
+</ul>
+<p><em>Ejemplo:</em><br>
+Si el valor en <strong>REGION</strong> es <code>"Metropolitana"</code>, el resultado en <strong>REGION_CORREGIDA</strong> será <code>"Región de Metropolitana"</code>.</p>
+<hr>
+</section>
+<section id="aplicar-reemplazos-de-forma-acumulativa" class="level2">
+<h2 class="anchored" data-anchor-id="aplicar-reemplazos-de-forma-acumulativa">📌 Aplicar Reemplazos de Forma Acumulativa</h2>
+<section id="definición-de-la-lista-de-reemplazos" class="level3">
+<h3 class="anchored" data-anchor-id="definición-de-la-lista-de-reemplazos">Definición de la Lista de Reemplazos</h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode m code-with-copy"><code class="sourceCode matlab"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="va">Reemplazos</span> <span class="op">=</span> {</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"Región de Metropolitana"</span><span class="op">,</span> <span class="st">"Región Metropolitana de Santiago"</span>}<span class="op">,</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"Región de Tarapaca"</span><span class="op">,</span> <span class="st">"Región de Tarapacá"</span>}<span class="op">,</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"Región de Magallanes"</span><span class="op">,</span> <span class="st">"Región de Magallanes y Antártica Chilena"</span>}<span class="op">,</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"Región de Aysén"</span><span class="op">,</span> <span class="st">"Región de Aysén del Gral.Ibañez del Campo"</span>}<span class="op">,</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"Región de O`Higgins"</span><span class="op">,</span> <span class="st">"Región del Libertador Bernardo O'Higgins"</span>}<span class="op">,</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"Región de Biobio"</span><span class="op">,</span> <span class="st">"Región del Bío-Bío"</span>}<span class="op">,</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"Región de La Araucania"</span><span class="op">,</span> <span class="st">"Región de La Araucanía"</span>}<span class="op">,</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"Región de Los Rios"</span><span class="op">,</span> <span class="st">"Región de los Ríos"</span>}<span class="op">,</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"Región de Valparaiso"</span><span class="op">,</span> <span class="st">"Región de Valparaíso"</span>}<span class="op">,</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"Región de Maule"</span><span class="op">,</span> <span class="st">"Región del Maule"</span>}</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>¿Qué hace esto?</strong></p>
+<ul>
+<li>Se define una lista de pares, donde cada par contiene:
+<ul>
+<li><strong>Texto original:</strong> Valor que aparece en la columna <strong>REGION_CORREGIDA</strong>.</li>
+<li><strong>Texto corregido:</strong> Valor con el que se reemplazará el texto original.</li>
+</ul></li>
 </ul>
 </section>
-<section id="hola" class="level2">
-<h2 class="anchored" data-anchor-id="hola">Hola</h2>
+<section id="aplicación-de-los-reemplazos-con-list.accumulate" class="level3">
+<h3 class="anchored" data-anchor-id="aplicación-de-los-reemplazos-con-list.accumulate">Aplicación de los Reemplazos con List.Accumulate</h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode m code-with-copy"><code class="sourceCode matlab"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="va">Resultado</span> <span class="op">=</span> <span class="va">List</span>.<span class="va">Accumulate</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">Reemplazos</span><span class="op">,</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    #<span class="st">"Added Custom"</span><span class="op">,</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    (<span class="va">tabla</span><span class="op">,</span> <span class="va">par</span>) <span class="op">=&gt;</span> <span class="va">Table</span>.<span class="va">ReplaceValue</span>(</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">tabla</span><span class="op">,</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">par</span>{<span class="fl">0</span>}<span class="op">,</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">par</span>{<span class="fl">1</span>}<span class="op">,</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">Replacer</span>.<span class="va">ReplaceText</span><span class="op">,</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"REGION_CORREGIDA"</span>}</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>¿Qué hace esto?</strong></p>
+<ul>
+<li><strong>List.Accumulate:</strong> Itera sobre cada par de la lista <strong>Reemplazos</strong>.</li>
+<li><strong>#“Added Custom”:</strong> Es el paso inicial que contiene la tabla con la nueva columna <strong>REGION_CORREGIDA</strong>.</li>
+<li><strong>Table.ReplaceValue:</strong> En cada iteración, reemplaza el valor <strong>par{0}</strong> (texto original) por <strong>par{1}</strong> (texto corregido) en la columna <strong>REGION_CORREGIDA</strong>.</li>
+<li>El proceso es acumulativo: cada reemplazo se aplica sobre el resultado del reemplazo anterior.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="construcción-de-métricas-el-mapa-interactivo-y-gráficos" class="level2">
+<h2 class="anchored" data-anchor-id="construcción-de-métricas-el-mapa-interactivo-y-gráficos">Construcción de métricas, el mapa interactivo y gráficos</h2>
+<section id="medidas" class="level3">
+<h3 class="anchored" data-anchor-id="medidas">Medidas</h3>
+<p>En PowerBi utilizamos una herramienta llamada medida, con esta podemos realizar cálculos utilizando la sintaxis adecuada, lo que permite construir métricas a partir de nuestros datos</p>
+<section id="última-actualización" class="level4">
+<h4 class="anchored" data-anchor-id="última-actualización">Última Actualización</h4>
+<div class="sourceCode" id="cb26"><pre class="sourceCode m code-with-copy"><code class="sourceCode matlab"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>Ú<span class="va">ltima</span> <span class="va">Actualización</span> <span class="op">=</span> <span class="va">MAX</span>(<span class="ss">'clientes_afectados_historico'</span>[<span class="va">TIMESTAMP</span>])   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Con esta medida podremos construir una <em>card</em> con la hora actual que corresponde la información</p>
+</section>
+<section id="total-de-hogares-sin-luz" class="level4">
+<h4 class="anchored" data-anchor-id="total-de-hogares-sin-luz">Total de Hogares sin Luz</h4>
+</section>
+<section id="variación-respecto-a-la-medición-anterior" class="level4">
+<h4 class="anchored" data-anchor-id="variación-respecto-a-la-medición-anterior">Variación respecto a la medición anterior</h4>
+<div class="sourceCode" id="cb27"><pre class="sourceCode m code-with-copy"><code class="sourceCode matlab"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="va">Variación</span> <span class="va">Afectados</span> <span class="va">Histórica</span> <span class="op">=</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="va">VAR</span> <span class="va">ultimoTiempo</span> <span class="op">=</span> <span class="va">MAX</span>(<span class="va">clientes_afectados_historico</span>[<span class="va">TIMESTAMP</span>])</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="va">VAR</span> <span class="va">PenultimoTiempo</span> <span class="op">=</span> </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">CALCULATE</span>(<span class="va">MAX</span>(<span class="va">clientes_afectados_historico</span>[<span class="va">TIMESTAMP</span>])<span class="op">,</span> </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>              <span class="va">clientes_afectados_historico</span>[<span class="va">TIMESTAMP</span>] <span class="op">&lt;</span> <span class="va">ultimoTiempo</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="va">VAR</span> <span class="va">Afectados_Ultima</span> <span class="op">=</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">CALCULATE</span>(<span class="va">SUM</span>(<span class="va">clientes_afectados_historico</span>[<span class="va">CLIENTES_AFECTADOS</span>])<span class="op">,</span> </span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>              <span class="va">clientes_afectados_historico</span>[<span class="va">TIMESTAMP</span>] <span class="op">=</span> <span class="va">ultimoTiempo</span>)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="va">VAR</span> <span class="va">Afectados_Anterior</span> <span class="op">=</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">CALCULATE</span>(<span class="va">SUM</span>(<span class="va">clientes_afectados_historico</span>[<span class="va">CLIENTES_AFECTADOS</span>])<span class="op">,</span> </span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>              <span class="va">clientes_afectados_historico</span>[<span class="va">TIMESTAMP</span>] <span class="op">=</span> <span class="va">PenultimoTiempo</span>)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="va">RETURN</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="va">Afectados_Ultima</span> <span class="op">-</span> <span class="va">Afectados_Anterior</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
+</section>
 </section>
 </section>
 

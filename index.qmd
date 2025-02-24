@@ -34,7 +34,8 @@ Les recomiendo crear un entorno virtual para instalar las dependencias. Para ell
 
 ``` python
 
- python -m venv "nombre-del-entorno"-env
+    python -m venv "nombre-del-entorno"-env
+
 
 ```
 
@@ -43,6 +44,7 @@ Una vez creado el entorno virtual, actívenlo con el siguiente comando:
 ``` bash
 
     source "nombre-del-entorno"-env/bin/activate
+
 
 ```
 
@@ -69,13 +71,17 @@ Primero, necesitamos importar las librerías necesarias:
 Con el entorno virtual activado, instalemos las librerías necesarias:
 
 ``` bash
-pip install playwright pandas
+
+    pip install playwright pandas
+    
 ```
 
 Además, debemos instalar los navegadores de Playwright:
 
 ``` bash
-playwright install
+
+    playwright install
+
 ```
 
 ------------------------------------------------------------------------
@@ -331,39 +337,269 @@ Dependiendo de la carpeta donde hayamos realizado nuestro proyecto, podremos enc
 Para poder manipular nuestros datos en Powerbi hay que seguir estos sencillos pasos:
 
 - **Abrir PowerBI**
+
+
 - **Click en Get data from other sources**
+
+![Figura 1](images/get_data.png)
+
+
 - **Seleccionamos Text/CSV**
+
+![Figura 3](images/select_csv.png)
+
+
 - **Buscamos nuestro archivo .csv**
 
-Una vez realizado estos pasos, nos aparecerá una ventana emergente, donde presionaremos en Transform Data. A través de esta hoja de cálculo podremos completar los requerimientos para poder visualizar nuestro mapa de Chile por regiones. Estos son:
 
-- **Ordenar de mayor a menor los cortes de luz**
-- **Construir una nueva columna llamada Region_Corregida a partir de nuestra variable región**
-- **Renombrar cada región de esta columna con los nombres del archivo topojson(mapa)**
-
-Para ordenar de manera descendiente los clientes afectados, los pasos son similares a excel:
-
-- **Click en la columna clientes_afectados**
-- **Ordenar de mayor a menor**
-- **Cerramos el menú**
-
-## **Nueva columna región corregida** 
-
-En el menú principal buscamos la sección Add column, y clickeamos en Custom column, Luego ponemos el siguiente código:
+![Figura 3](images/Text_csv.png)
 
 
-```M
-= Table.AddColumn(#"Sorted Rows", "Region_Corregida", each "Región de " & [REGION])
+- **Click en Load**
 
-``` 
+![Figura 4](images/load_data.png)
 
-📌 **¿Qué hace esto?**
+A continuación explicaré  paso a paso el código M que utilizamos para transformar datos en Power Query. Este script carga nuestro archivo CSV, promociona los encabezados, cambia los tipos de datos, agrega una columna personalizada concatenando un texto fijo con el valor existente en la columna **REGION**, y aplica una serie de reemplazos para corregir los nombres de las regiones de forma automatizada.
 
- - **Table.AddColumn → Función que agrega una nueva columna a una tabla existente.**
- - **#"Sorted Rows" → Nombre de nuestra base ya ordenada (paso anterior) en la que se está agregando la nueva columna.**
- - **"Region_Corregida" → Nombre de la nueva columna que se está creando.**
- - **each "Región de " & [REGION] → Expresión que se evalúa para cada fila:**
- - **"Región de " → Texto fijo.**
- - **[REGION] → Columna existente en la tabla, cuyos valores se concatenan con el texto fijo.**
 
-## Hola 
+- **En la sección Home click en Advanced Editor**
+
+![Figura 4](images/Advance_editor.png)
+
+- **Copia y pega el código de más abajo**
+
+- **Click en Done**
+
+![Figura 4](images/Code_M.png)
+
+# Código M
+
+```m
+let
+    // Cargar archivo CSV y promover encabezados
+    Source = Csv.Document(
+        File.Contents("C:\Users\SIMON\Desktop\Kaggle\luz\power_bi\clientes_afectados_tiempo_real.csv"),
+        [Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]
+    ),
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    
+    // Cambiar tipos de datos
+    #"Changed Type" = Table.TransformColumnTypes(
+        #"Promoted Headers",
+        {
+            {"ID_UNICO", type text}, 
+            {"TIMESTAMP", type datetime}, 
+            {"HORA_EXACTA_REPORTE", type datetime}, 
+            {"FECHA", type date}, 
+            {"REGION", type text}, 
+            {"COMUNA", type text}, 
+            {"EMPRESA", type text}, 
+            {"CLIENTES_AFECTADOS", Int64.Type}, 
+            {"ACTUALIZADO_HACE", type text}
+        }
+    ),
+    
+    // Agregar columna REGION_CORREGIDA concatenando "Región de " con el valor de REGION
+    #"Added Custom" = Table.AddColumn(
+        #"Changed Type",
+        "REGION_CORREGIDA",
+        each "Región de " & [REGION]
+    ),
+    
+    // Lista de reemplazos para la columna REGION_CORREGIDA
+    Reemplazos = {
+        {"Región de Metropolitana", "Región Metropolitana de Santiago"},
+        {"Región de Tarapaca", "Región de Tarapacá"},
+        {"Región de Magallanes", "Región de Magallanes y Antártica Chilena"},
+        {"Región de Aysén", "Región de Aysén del Gral.Ibañez del Campo"},
+        {"Región de O`Higgins", "Región del Libertador Bernardo O'Higgins"},
+        {"Región de Biobio", "Región del Bío-Bío"},
+        {"Región de La Araucania", "Región de La Araucanía"},
+        {"Región de Los Rios", "Región de los Ríos"},
+        {"Región de Valparaiso", "Región de Valparaíso"},
+        {"Región de Maule", "Región del Maule"}
+    },
+
+    // Aplicar reemplazos a REGION_CORREGIDA de forma acumulativa
+    Resultado = List.Accumulate(
+        Reemplazos,
+        #"Added Custom",
+        (tabla, par) => Table.ReplaceValue(
+            tabla,
+            par{0},
+            par{1},
+            Replacer.ReplaceText,
+            {"REGION_CORREGIDA"}
+        )
+    )
+in
+    Resultado
+```
+
+
+
+
+
+
+
+## Explicación del código M 
+
+
+A continuación, desglosamos cada parte del código para comprender su funcionamiento.
+
+
+---
+
+## 📌 Cargar el Archivo CSV y Promover Encabezados
+
+```m
+Source = Csv.Document(
+    File.Contents("C:\Users\SIMON\Desktop\Kaggle\luz\power_bi\clientes_afectados_tiempo_real.csv"),
+    [Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]
+),
+#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+```
+
+**¿Qué hace esto?**
+
+- **Csv.Document & File.Contents:** Carga el archivo CSV desde la ruta especificada.
+- **Table.PromoteHeaders:** Convierte la primera fila en los nombres de columna, facilitando la manipulación posterior.
+
+---
+
+## 📌 Cambiar Tipos de Datos
+
+```m
+#"Changed Type" = Table.TransformColumnTypes(
+    #"Promoted Headers",
+    {
+        {"ID_UNICO", type text}, 
+        {"TIMESTAMP", type datetime}, 
+        {"HORA_EXACTA_REPORTE", type datetime}, 
+        {"FECHA", type date}, 
+        {"REGION", type text}, 
+        {"COMUNA", type text}, 
+        {"EMPRESA", type text}, 
+        {"CLIENTES_AFECTADOS", Int64.Type}, 
+        {"ACTUALIZADO_HACE", type text}
+    }
+)
+```
+
+**¿Qué hace esto?**
+
+- Se establecen los tipos de datos adecuados para cada columna, lo que es crucial para evitar errores y asegurar que los cálculos o transformaciones posteriores se realicen correctamente.
+
+---
+
+## 📌 Agregar una Columna Personalizada
+
+```m
+#"Added Custom" = Table.AddColumn(
+    #"Changed Type",
+    "REGION_CORREGIDA",
+    each "Región de " & [REGION]
+)
+```
+
+**¿Qué hace esto?**
+
+- **Table.AddColumn:** Agrega una nueva columna a la tabla.
+- **"REGION_CORREGIDA":** Es el nombre de la nueva columna.
+- **each "Región de " & [REGION]:** Para cada fila, concatena el texto fijo `"Región de "` con el valor existente en la columna **REGION**.
+
+*Ejemplo:*  
+Si el valor en **REGION** es `"Metropolitana"`, el resultado en **REGION_CORREGIDA** será `"Región de Metropolitana"`.
+
+---
+
+## 📌 Aplicar Reemplazos de Forma Acumulativa
+
+### Definición de la Lista de Reemplazos
+
+```m
+Reemplazos = {
+    {"Región de Metropolitana", "Región Metropolitana de Santiago"},
+    {"Región de Tarapaca", "Región de Tarapacá"},
+    {"Región de Magallanes", "Región de Magallanes y Antártica Chilena"},
+    {"Región de Aysén", "Región de Aysén del Gral.Ibañez del Campo"},
+    {"Región de O`Higgins", "Región del Libertador Bernardo O'Higgins"},
+    {"Región de Biobio", "Región del Bío-Bío"},
+    {"Región de La Araucania", "Región de La Araucanía"},
+    {"Región de Los Rios", "Región de los Ríos"},
+    {"Región de Valparaiso", "Región de Valparaíso"},
+    {"Región de Maule", "Región del Maule"}
+}
+```
+
+**¿Qué hace esto?**
+
+- Se define una lista de pares, donde cada par contiene:
+  - **Texto original:** Valor que aparece en la columna **REGION_CORREGIDA**.
+  - **Texto corregido:** Valor con el que se reemplazará el texto original.
+
+### Aplicación de los Reemplazos con List.Accumulate
+
+```m
+Resultado = List.Accumulate(
+    Reemplazos,
+    #"Added Custom",
+    (tabla, par) => Table.ReplaceValue(
+        tabla,
+        par{0},
+        par{1},
+        Replacer.ReplaceText,
+        {"REGION_CORREGIDA"}
+    )
+)
+```
+
+**¿Qué hace esto?**
+
+- **List.Accumulate:** Itera sobre cada par de la lista **Reemplazos**.
+- **#"Added Custom":** Es el paso inicial que contiene la tabla con la nueva columna **REGION_CORREGIDA**.
+- **Table.ReplaceValue:** En cada iteración, reemplaza el valor **par{0}** (texto original) por **par{1}** (texto corregido) en la columna **REGION_CORREGIDA**.
+- El proceso es acumulativo: cada reemplazo se aplica sobre el resultado del reemplazo anterior.
+
+---
+
+
+## Construcción de métricas, el mapa interactivo y gráficos
+
+### Medidas
+
+En PowerBi utilizamos una herramienta llamada medida, con esta podemos realizar cálculos utilizando la sintaxis adecuada, lo que permite construir métricas a partir de nuestros datos
+
+#### Última Actualización
+
+```m
+
+Última Actualización = MAX('clientes_afectados_historico'[TIMESTAMP])   
+
+```
+
+Con esta medida podremos construir una *card* con la hora actual que corresponde la información
+
+#### Total de Hogares sin Luz
+
+#### Variación respecto a la medición anterior
+
+```m
+Variación Afectados Histórica = 
+VAR ultimoTiempo = MAX(clientes_afectados_historico[TIMESTAMP])
+VAR PenultimoTiempo = 
+    CALCULATE(MAX(clientes_afectados_historico[TIMESTAMP]), 
+              clientes_afectados_historico[TIMESTAMP] < ultimoTiempo)
+
+VAR Afectados_Ultima =
+    CALCULATE(SUM(clientes_afectados_historico[CLIENTES_AFECTADOS]), 
+              clientes_afectados_historico[TIMESTAMP] = ultimoTiempo)
+
+VAR Afectados_Anterior =
+    CALCULATE(SUM(clientes_afectados_historico[CLIENTES_AFECTADOS]), 
+              clientes_afectados_historico[TIMESTAMP] = PenultimoTiempo)
+
+RETURN
+    Afectados_Ultima - Afectados_Anterior
+
+```

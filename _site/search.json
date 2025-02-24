@@ -32,7 +32,7 @@
     "href": "index.html#entorno-de-desarrollo",
     "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "Entorno de Desarrollo",
-    "text": "Entorno de Desarrollo\nPara este proyecto, necesitaremos instalar las siguientes dependencias: Playwright, Pandas y Powerbi.\nLes recomiendo crear un entorno virtual para instalar las dependencias. Para ello, decidan un directorio donde quieran crear el entorno virtual y ejecuten el siguiente comando en la terminal:\n\n python -m venv \"nombre-del-entorno\"-env\nUna vez creado el entorno virtual, actívenlo con el siguiente comando:\n\n    source \"nombre-del-entorno\"-env/bin/activate\nAhora, instalemos las dependencias necesarias:\n\n    pip install playwright pandas"
+    "text": "Entorno de Desarrollo\nPara este proyecto, necesitaremos instalar las siguientes dependencias: Playwright, Pandas y Powerbi.\nLes recomiendo crear un entorno virtual para instalar las dependencias. Para ello, decidan un directorio donde quieran crear el entorno virtual y ejecuten el siguiente comando en la terminal:\n\n    python -m venv \"nombre-del-entorno\"-env\n\nUna vez creado el entorno virtual, actívenlo con el siguiente comando:\n\n    source \"nombre-del-entorno\"-env/bin/activate\n\nAhora, instalemos las dependencias necesarias:\n\n    pip install playwright pandas"
   },
   {
     "objectID": "index.html#extracción-de-los-datos",
@@ -124,5 +124,68 @@
     "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "Hola",
     "text": "Hola"
+  },
+  {
+    "objectID": "index.html#cargar-el-archivo-csv-y-promover-encabezados",
+    "href": "index.html#cargar-el-archivo-csv-y-promover-encabezados",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "📌 Cargar el Archivo CSV y Promover Encabezados",
+    "text": "📌 Cargar el Archivo CSV y Promover Encabezados\nSource = Csv.Document(\n    File.Contents(\"C:\\Users\\SIMON\\Desktop\\Kaggle\\luz\\power_bi\\clientes_afectados_tiempo_real.csv\"),\n    [Delimiter=\",\", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]\n),\n#\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])\n¿Qué hace esto?\n\nCsv.Document & File.Contents: Carga el archivo CSV desde la ruta especificada.\nTable.PromoteHeaders: Convierte la primera fila en los nombres de columna, facilitando la manipulación posterior."
+  },
+  {
+    "objectID": "index.html#cambiar-tipos-de-datos",
+    "href": "index.html#cambiar-tipos-de-datos",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "📌 Cambiar Tipos de Datos",
+    "text": "📌 Cambiar Tipos de Datos\n#\"Changed Type\" = Table.TransformColumnTypes(\n    #\"Promoted Headers\",\n    {\n        {\"ID_UNICO\", type text}, \n        {\"TIMESTAMP\", type datetime}, \n        {\"HORA_EXACTA_REPORTE\", type datetime}, \n        {\"FECHA\", type date}, \n        {\"REGION\", type text}, \n        {\"COMUNA\", type text}, \n        {\"EMPRESA\", type text}, \n        {\"CLIENTES_AFECTADOS\", Int64.Type}, \n        {\"ACTUALIZADO_HACE\", type text}\n    }\n)\n¿Qué hace esto?\n\nSe establecen los tipos de datos adecuados para cada columna, lo que es crucial para evitar errores y asegurar que los cálculos o transformaciones posteriores se realicen correctamente."
+  },
+  {
+    "objectID": "index.html#agregar-una-columna-personalizada",
+    "href": "index.html#agregar-una-columna-personalizada",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "📌 Agregar una Columna Personalizada",
+    "text": "📌 Agregar una Columna Personalizada\n#\"Added Custom\" = Table.AddColumn(\n    #\"Changed Type\",\n    \"REGION_CORREGIDA\",\n    each \"Región de \" & [REGION]\n)\n¿Qué hace esto?\n\nTable.AddColumn: Agrega una nueva columna a la tabla.\n“REGION_CORREGIDA”: Es el nombre de la nueva columna.\neach “Región de” & [REGION]: Para cada fila, concatena el texto fijo \"Región de \" con el valor existente en la columna REGION.\n\nEjemplo:\nSi el valor en REGION es \"Metropolitana\", el resultado en REGION_CORREGIDA será \"Región de Metropolitana\"."
+  },
+  {
+    "objectID": "index.html#aplicar-reemplazos-de-forma-acumulativa",
+    "href": "index.html#aplicar-reemplazos-de-forma-acumulativa",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "📌 Aplicar Reemplazos de Forma Acumulativa",
+    "text": "📌 Aplicar Reemplazos de Forma Acumulativa\n\nDefinición de la Lista de Reemplazos\nReemplazos = {\n    {\"Región de Metropolitana\", \"Región Metropolitana de Santiago\"},\n    {\"Región de Tarapaca\", \"Región de Tarapacá\"},\n    {\"Región de Magallanes\", \"Región de Magallanes y Antártica Chilena\"},\n    {\"Región de Aysén\", \"Región de Aysén del Gral.Ibañez del Campo\"},\n    {\"Región de O`Higgins\", \"Región del Libertador Bernardo O'Higgins\"},\n    {\"Región de Biobio\", \"Región del Bío-Bío\"},\n    {\"Región de La Araucania\", \"Región de La Araucanía\"},\n    {\"Región de Los Rios\", \"Región de los Ríos\"},\n    {\"Región de Valparaiso\", \"Región de Valparaíso\"},\n    {\"Región de Maule\", \"Región del Maule\"}\n}\n¿Qué hace esto?\n\nSe define una lista de pares, donde cada par contiene:\n\nTexto original: Valor que aparece en la columna REGION_CORREGIDA.\nTexto corregido: Valor con el que se reemplazará el texto original.\n\n\n\n\nAplicación de los Reemplazos con List.Accumulate\nResultado = List.Accumulate(\n    Reemplazos,\n    #\"Added Custom\",\n    (tabla, par) =&gt; Table.ReplaceValue(\n        tabla,\n        par{0},\n        par{1},\n        Replacer.ReplaceText,\n        {\"REGION_CORREGIDA\"}\n    )\n)\n¿Qué hace esto?\n\nList.Accumulate: Itera sobre cada par de la lista Reemplazos.\n#“Added Custom”: Es el paso inicial que contiene la tabla con la nueva columna REGION_CORREGIDA.\nTable.ReplaceValue: En cada iteración, reemplaza el valor par{0} (texto original) por par{1} (texto corregido) en la columna REGION_CORREGIDA.\nEl proceso es acumulativo: cada reemplazo se aplica sobre el resultado del reemplazo anterior."
+  },
+  {
+    "objectID": "index.html#tarjetas",
+    "href": "index.html#tarjetas",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "Tarjetas,",
+    "text": "Tarjetas,\nEn este post explicaré paso a paso el código M que utilizamos para transformar datos en Power Query. Este script carga un archivo CSV, promociona los encabezados, cambia los tipos de datos, agrega una columna personalizada concatenando un texto fijo con el valor existente en la columna REGION, y aplica una serie de reemplazos para corregir los nombres de las regiones de forma automatizada."
+  },
+  {
+    "objectID": "index.html#construcción-de-métricas-el-mapa-interactivo-y-gráficos",
+    "href": "index.html#construcción-de-métricas-el-mapa-interactivo-y-gráficos",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "Construcción de métricas, el mapa interactivo y gráficos",
+    "text": "Construcción de métricas, el mapa interactivo y gráficos\n\nMedidas\nEn PowerBi utilizamos una herramienta llamada medida, con esta podemos realizar cálculos utilizando la sintaxis adecuada, lo que permite construir métricas a partir de nuestros datos\n\nÚltima Actualización\n\nÚltima Actualización = MAX('clientes_afectados_historico'[TIMESTAMP])   \nCon esta medida podremos construir una card con la hora actual que corresponde la información\n\n\nTotal de Hogares sin Luz\n\n\nVariación respecto a la medición anterior\nVariación Afectados Histórica = \nVAR ultimoTiempo = MAX(clientes_afectados_historico[TIMESTAMP])\nVAR PenultimoTiempo = \n    CALCULATE(MAX(clientes_afectados_historico[TIMESTAMP]), \n              clientes_afectados_historico[TIMESTAMP] &lt; ultimoTiempo)\n\nVAR Afectados_Ultima =\n    CALCULATE(SUM(clientes_afectados_historico[CLIENTES_AFECTADOS]), \n              clientes_afectados_historico[TIMESTAMP] = ultimoTiempo)\n\nVAR Afectados_Anterior =\n    CALCULATE(SUM(clientes_afectados_historico[CLIENTES_AFECTADOS]), \n              clientes_afectados_historico[TIMESTAMP] = PenultimoTiempo)\n\nRETURN\n    Afectados_Ultima - Afectados_Anterior"
+  },
+  {
+    "objectID": "index.html#powerquery",
+    "href": "index.html#powerquery",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "PowerQuery",
+    "text": "PowerQuery\nlet\n    // Cargar archivo CSV y promover encabezados\n    Source = Csv.Document(\n        File.Contents(\"C:\\Users\\SIMON\\Desktop\\Kaggle\\luz\\power_bi\\clientes_afectados_tiempo_real.csv\"),\n        [Delimiter=\",\", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]\n    ),\n    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n    \n    // Cambiar tipos de datos\n    #\"Changed Type\" = Table.TransformColumnTypes(\n        #\"Promoted Headers\",\n        {\n            {\"ID_UNICO\", type text}, \n            {\"TIMESTAMP\", type datetime}, \n            {\"HORA_EXACTA_REPORTE\", type datetime}, \n            {\"FECHA\", type date}, \n            {\"REGION\", type text}, \n            {\"COMUNA\", type text}, \n            {\"EMPRESA\", type text}, \n            {\"CLIENTES_AFECTADOS\", Int64.Type}, \n            {\"ACTUALIZADO_HACE\", type text}\n        }\n    ),\n    \n    // Agregar columna REGION_CORREGIDA concatenando \"Región de \" con el valor de REGION\n    #\"Added Custom\" = Table.AddColumn(\n        #\"Changed Type\",\n        \"REGION_CORREGIDA\",\n        each \"Región de \" & [REGION]\n    ),\n    \n    // Lista de reemplazos para la columna REGION_CORREGIDA\n    Reemplazos = {\n        {\"Región de Metropolitana\", \"Región Metropolitana de Santiago\"},\n        {\"Región de Tarapaca\", \"Región de Tarapacá\"},\n        {\"Región de Magallanes\", \"Región de Magallanes y Antártica Chilena\"},\n        {\"Región de Aysén\", \"Región de Aysén del Gral.Ibañez del Campo\"},\n        {\"Región de O`Higgins\", \"Región del Libertador Bernardo O'Higgins\"},\n        {\"Región de Biobio\", \"Región del Bío-Bío\"},\n        {\"Región de La Araucania\", \"Región de La Araucanía\"},\n        {\"Región de Los Rios\", \"Región de los Ríos\"},\n        {\"Región de Valparaiso\", \"Región de Valparaíso\"},\n        {\"Región de Maule\", \"Región del Maule\"}\n    },\n\n    // Aplicar reemplazos a REGION_CORREGIDA de forma acumulativa\n    Resultado = List.Accumulate(\n        Reemplazos,\n        #\"Added Custom\",\n        (tabla, par) =&gt; Table.ReplaceValue(\n            tabla,\n            par{0},\n            par{1},\n            Replacer.ReplaceText,\n            {\"REGION_CORREGIDA\"}\n        )\n    )\nin\n    Resultado"
+  },
+  {
+    "objectID": "index.html#análisis-del-código-m",
+    "href": "index.html#análisis-del-código-m",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "Análisis del código M",
+    "text": "Análisis del código M\nGeneralmente tienes dos maneras de realizar las transformaciones con Power Query: con interfaz gráfica y con código. Para simplificar el proceso, utilizaremos el siguiente código que nos permitirá dejar lista la base para pasar a los diagramas. Repasaremos cada línea de código. Si quieres pasar directamente a la visualización, puedes omitir esta parte."
+  },
+  {
+    "objectID": "index.html#explicación-del-código-m",
+    "href": "index.html#explicación-del-código-m",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "Explicación del código M",
+    "text": "Explicación del código M\nA continuación, desglosamos cada parte del código para comprender su funcionamiento."
   }
 ]
