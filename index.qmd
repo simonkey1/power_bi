@@ -16,6 +16,8 @@ format:
 
 Hace poco descubrí la página de la Superintendecia de Electricidad y Combustibles (SEC). Me llamó la atención en particular su sección de métricas e información de los cortes de luz a nivel nacional, debido a que noté que hay un gran margen de mejora en su accesibilidad y visualización de los datos para el usuario.
 
+
+
 ## ¿Qué haremos?
 
 1.  **Preparar nuestro entorno**: primero, instalaremos las dependencias necesarias para el proyecto.
@@ -25,6 +27,14 @@ Hace poco descubrí la página de la Superintendecia de Electricidad y Combustib
 3.  **Transformación de los datos**: necesitaremos limpiar y procesar los datos extraídos con Pandas.
 
 4.  **Visualización de los datos**: finalmente, visualizaremos los datos en Powerbi.
+
+![Flujo de Trabajo Teórico](/images/flow.png)
+
+Como señala el flujo, empezamos por la Api de la SEC a través de python, luego pasamos a powerbi para terminar las trasnformación y la posterior visualización
+
+## Aclaración 🔴
+
+Si bien creamos una base histórica, esta es parte de otro proyecto independiente, donde tendremos un enfoque diferente con visualizaciones propias. Mantuve el flujo original ya que igualmente lo utilizaremos para una medida, además que nos irá acumulando los datos desde el momento que empezamos la iteración. De todas maneras, si deseas no utilizar esta base, basta con eliminar la parte del código donde la creamos.
 
 ## Entorno de Desarrollo
 
@@ -131,6 +141,8 @@ Esta función usa **Playwright** para interceptar las respuestas de la API de la
 4.  **Procesar los datos** para calcular tiempos y crear identificadores únicos.
 5.  **Guardar la información en archivos CSV**.
 6.  **Cerrar el navegador** una vez completado el proceso.
+
+
 
 ------------------------------------------------------------------------
 
@@ -324,6 +336,22 @@ while True:
 
 -   **Ejecuta `intercept_responses()` en un bucle infinito**.
 -   **Espera 5 minutos (`time.sleep(5 * 60)`) antes de volver a ejecutar la función**.
+
+Puedes elegir el tiempo que desees, yo decidí 5 minutos. 
+
+## Extra
+
+Esta es una manera de automatizar, no obstante, también puedes utilizar el programador de tareas en Windows y ejecutar un .bat que contenga la ejecución del .py. Si lo ejecutas, no es necesario mantener el código de loop de arriba, ya que el programador lo puedes configurar con intervalos de tiempo.
+
+
+```bash
+@echo off
+cd C:\Users\SIMON\Desktop\Kaggle\luz
+python end.py
+exit
+
+```
+
 
 ### Felicidades⭐!
 Ya tenemos nuestra base de datos casi lista para su visualización. Si bien podríamos terminar de darle formato a los datos directamente con pandas, es una perfecta ocasión para hacerlo en powerbi, ya que podremos visualizar con facilidad los cambios que iremos realizando para construir nuestro dashboard interactivo. 
@@ -564,13 +592,12 @@ Resultado = List.Accumulate(
 ---
 
 
-## Construcción de métricas, el mapa interactivo y gráficos
+## Construcción de métricas, el mapa interactivo, filtro y gráficos
 
-### Medidas
 
 En PowerBi utilizamos una herramienta llamada medida, con esta podemos realizar cálculos utilizando la sintaxis adecuada, lo que permite construir métricas a partir de nuestros datos
 
-#### Última Actualización
+### Última Actualización
 
 ```m
 
@@ -578,28 +605,161 @@ En PowerBi utilizamos una herramienta llamada medida, con esta podemos realizar 
 
 ```
 
-Con esta medida podremos construir una *card* con la hora actual que corresponde la información
+Con esta medida podremos construir una *card* con la hora actual que corresponde la información. Esta por defecto incluye fechas, vamos a corregirlo:
 
-#### Total de Hogares sin Luz
+- **Click en *Format Visual* en el menú de la derecha**
+- **General**
+- ***Data Format***
+- **en *Format option* buscaremos el formato *long Time***
 
-#### Variación respecto a la medición anterior
+![Figura x](images/format_visual.png)
+
+### Total de Hogares sin Luz
+
+Es una buena práctica crear las medidas explícitamente, es decir, introducir el código de lo que queremos que haga nuestra medida. Para efectos prácticos, utilizaremos la medida implícita de sumatoria que nos ofrece PowerBi:
+
+- **Seleccionamos una *card* y arrastramos CLIENTES_AFECTADOS a *field***
+
+![Figura x](images/Total_casas_kpi.png)
+
+### Comparación última medición
 
 ```m
-Variación Afectados Histórica = 
-VAR ultimoTiempo = MAX(clientes_afectados_historico[TIMESTAMP])
+Comparación última medición = 
+VAR ultimoTiempo = MAX(clientes_afectados_tiempo_real[TIMESTAMP])
 VAR PenultimoTiempo = 
-    CALCULATE(MAX(clientes_afectados_historico[TIMESTAMP]), 
-              clientes_afectados_historico[TIMESTAMP] < ultimoTiempo)
+    CALCULATE(MAX(clientes_afectados_tiempo_real[TIMESTAMP]), 
+              clientes_afectados_tiempo_real[TIMESTAMP] < ultimoTiempo)
 
 VAR Afectados_Ultima =
-    CALCULATE(SUM(clientes_afectados_historico[CLIENTES_AFECTADOS]), 
-              clientes_afectados_historico[TIMESTAMP] = ultimoTiempo)
+    CALCULATE(SUM(clientes_afectados_tiempo_real[CLIENTES_AFECTADOS]), 
+              clientes_afectados_tiempo_real[TIMESTAMP] = ultimoTiempo)
 
 VAR Afectados_Anterior =
-    CALCULATE(SUM(clientes_afectados_historico[CLIENTES_AFECTADOS]), 
-              clientes_afectados_historico[TIMESTAMP] = PenultimoTiempo)
+    CALCULATE(SUM(clientes_afectados_tiempo_real[CLIENTES_AFECTADOS]), 
+              clientes_afectados_tiempo_real[TIMESTAMP] = PenultimoTiempo)
 
 RETURN
     Afectados_Ultima - Afectados_Anterior
 
 ```
+
+Básicamente esta medida crea 4 variables: 
+
+- **ultimoTiempo -> el tiempo más reciente**
+- **PenultimoTiempo -> medición pasada**
+- **Afectados_Ultima -> total de hogares afectados más reciente**
+- **Afectados_Anterior -> total de hogares afectados de la medición anterior**
+
+A través de estas podemos obtener la variación nominal de los hogares afectados respecto a la medición anterior
+
+
+![Figura 4](images/Comparacion_ultima.png)
+
+### Porcentaje hogares sin luz
+
+Con esta métrica podremos dimensionar la cantidad de hogares sin suministro eléctrico a nivel nacional. El total de hogares fue un dato que recogí del  [sitio web oficial](link)
+
+```m
+Porcentaje_Hogares_Sin_Luz = 
+VAR Total_Hogares = 6534588
+VAR Total_Afectados = SUM(clientes_afectados_tiempo_real[Clientes_Afectados])
+RETURN 
+    DIVIDE(Total_Afectados, Total_Hogares, 0)
+
+```
+
+![Figura 4](images/proporcion_nacional.png)
+
+### Mapa Interactivo
+
+Visitando mi [repositorio](link) puedes descargar el archivo .topojson necesario para visualizar el mapa de Chile. Una vez descargado, necesitamos habilitar la opción de mapas de forma (Shape Map) en nuestro Powerbi:
+
+ -**En la esquina inferior izquierda de la sección File click en Options and settings y luego Options**
+ -**Click en Preview Features y activamos el shape map visual**
+
+![Figura 4](images/Shape.png)
+
+
+Una vez activado lo introducimos con la interfaz gráfica seleccionando **Shape map** e introducimos como **Location** nuestra columna **REGION_CORREGIDA** que creamos antes y en **Color saturation** la sumatoria de los clientes afectados. 
+
+![Figura 4](images/Mapa1.png)
+
+Nos dirigimos a la pestaña **visual** del mapa y en **map type** seleccionamos **Custom map** y en **Add a map type** agregamos nuestro archivo json
+
+![Figura 4](images/mapa2.png)
+
+### Top 3 Comunas
+
+Ya sabes cómo agregar una medida, por lo que te proporciono el código para obtener una tarjeta que nos informe en top 3 actual de las comunas con mayor cantidad de hogares afectados. 
+
+
+```m
+TOP3_Comunas = 
+VAR ComunasFiltradas =
+    FILTER(
+        ALL(clientes_afectados_tiempo_real), 
+        clientes_afectados_tiempo_real[Region_Corregida] IN VALUES(clientes_afectados_tiempo_real[Region_Corregida])
+    )
+
+VAR ComunasGrouped =
+    SUMMARIZE(
+        ComunasFiltradas, 
+        clientes_afectados_tiempo_real[Comuna],
+        "@Clientes_Afectados", SUM(clientes_afectados_tiempo_real[Clientes_Afectados])
+    )
+
+VAR ComunasRanked =
+    TOPN(3, ComunasGrouped, [@Clientes_Afectados], DESC)
+
+RETURN
+    CONCATENATEX(ComunasRanked, clientes_afectados_tiempo_real[Comuna], ", ")
+
+
+```
+
+![Figura 4](images/TOP_3.png)
+
+### Hogares sin Luz por Región
+
+Este gráfico se crea con una visual de *Stacked bar chart*. Utilicé en el eje y las Comunas, en el X la sumatoria de clientes afectados y la leyenda son las empresas eléctricas
+
+![Figura 4](images/stacked_bar.png)
+
+### Hogares sin luz por Región
+
+Es una visualización tipo *#Clustered bar chart#* similar al anterior con la diferencia que ahora es por Regiones y sin leyenda
+
+![Figura 4](images/Hogares_region.png)
+
+### Filtro por Región
+
+Esta es una elección mía, podrías hacer filtros por comunas si deseas, incluso provincias si creas la columna. Lo utilicé con la interfaz gráfica, en la opción Filtro y en *field* las regiones, no la corregida, ya que son muy largos los nombres.
+
+### Listo!
+
+Felicidades, si llegaste hasta acá tienes un dashboard en condiciones, ¿cierto? Pues no necesariamente. Es funcional, pero requiere de un estilado personalizado para verse más atráctivo y que llame la atención. Decidí no hacer un tutorial de esto ya que mi enfoque principal no es hacer un tutorial a fondo de PowerBI. De hecho, no hice grandes cambios, simplemente estandaricé las fuentes, tamaños, colores, títulos y poco más. Te puedo señalar que es muy importante que hayan buenos contrastes, que las letras sean legibles y que no hayan tantos colores: menos es más. De todas maneras, podrás utilizar mi proyecto como plantilla para estilarlo a tu manera. 
+
+# Conclusiones
+
+A lo largo del tutorial hemos podido ahondar desde la extraccion de los datos con python, a la transformación y visualización de estos con powerbi. Me gustaría señalar algunos aspectos a considerar del proyecto: 
+
+- **Playwright + pandas:** combinación poderosa para extraer los datos y procesarlos, un factor clave para una correcta visualización
+
+
+- **Powerbi:** es una herramienta capaz de construir dashboards impactantes con un par de clicks y un poco de código, lo que es un aspecto positivo para mi experiencia considerando que es mi primera vez usándolo**
+
+
+- **Powerbi es un software de pago:** la capa gratuita muchas veces nos limita la personalización, escalabilidad del proyecto y procesos de automatización, esto me hizo frenar más ideas que tenía en mente para este proyecto, ya que requerían de una licencia pagada, sin embargo, no niego que siga realizando proyectos con Powerbi debido a su facilidad y versatilidad, de hecho mi siguiente proyecto es utilizando powerbi + postgresql, así que les invito a estar atentos
+
+
+- **Dependo de que el SEC funcione:** si se corta la luz y la página está caída, no podremos monitorear los casos, un aspecto que lamentablemente no puedo solucionar
+
+- **Base de datos histórica:** si te fijas bien, hemos creado dos bases pero sólo nos hemos quedado con la de tiempo real. Bueno, esto se debe en parte a lo mencionado más arriba sobre los costes, sumado a que si bien son datos parecidos, el enfoque cambia bastante, ya que buscamos patrones en el tiempo y utilizamos otras métricas para poder realizar el análisis, por lo que decidí profundizarlo de manera independiente a este proyecto. Aún así, la utilizamos en la medida para comparar respecto a la medición pasada
+
+- **Futuro del proyecto:** me entusiasma la idea de poder automatizar un sistema de reporte periódico (horas, minutos, días , mensuales, etc.) y poder ayudar a la gente a que podamos analizar los contenidos que ya nos presenta la SEC pero con un enfoque más didáctico y aterrizado para los usuarios. Es una tarea pendiente que dejo la puerta abierta a las posibilidades**
+
+- **Python para todo:** he pensado que si hago todo esto utilizando python, podríamos escalarlo gratuitamente. También es una idea que tengo pensada a futuro y que puede beneficiar en mayor medida a las personas
+
+Gracias por llegar hasta aquí, cualquier feedback siempre es bienvenido 💜
+
