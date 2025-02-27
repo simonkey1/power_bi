@@ -4,9 +4,11 @@ project:
 
 website:
   title: "SEC-DASH-2025"
-  image: "https://github.com/simonkey1/power_bi/blob/master/images/575shots_so.png?raw=true"
-  image-alt: "https://github.com/simonkey1/power_bi/blob/master/images/575shots_so.png?raw=true"
   favicon: assets/favicon.ico
+  open-graph: 
+    image: "https://github.com/simonkey1/power_bi/blob/master/images/575shots_so.png?raw=true"
+    image-alt: "https://github.com/simonkey1/power_bi/blob/master/images/575shots_so.png?raw=true"
+  
 
 format:
   html:
