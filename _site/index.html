@@ -220,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introducción" class="level2">
 <h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
-<p>Hace poco descubrí la página de la Superintendecia de Electricidad y Combustibles (SEC). Me llamó la atención en particular su sección de métricas e información de los cortes de luz a nivel nacional, debido a que noté que hay un gran margen de mejora en su accesibilidad y visualización de los datos para el usuario.</p>
+<p>Hace poco descubrí la página de la Superintendecia de Electricidad y Combustibles (SEC). Me llamó la atención en particular su sección de métricas e información de los cortes de luz a nivel nacional, debido a que noté que hay un gran margen de mejora en su accesibilidad y visualización de los datos para el usuario. NOTA: Al principio de la página, en la esquina superior derecha hay un interruptor para cambiar entre modo claro/oscuro, recomiendo el segundo, saludos!</p>
 </section>
 <section id="qué-haremos" class="level2">
 <h2 class="anchored" data-anchor-id="qué-haremos">¿Qué haremos?</h2>
@@ -505,7 +505,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/get_data.png" class="img-fluid figure-img"></p>
-<figcaption>Figura 1</figcaption>
+<figcaption>Captura de pantalla: Seleccionar la opción Text/CSV en PowerBI para importar datos</figcaption>
 </figure>
 </div>
 <ul>
@@ -514,7 +514,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/select_csv.png" class="img-fluid figure-img"></p>
-<figcaption>Figura 3</figcaption>
+<figcaption>Explorador de archivos: Ubicar el archivo .csv de datos</figcaption>
 </figure>
 </div>
 <ul>
@@ -523,7 +523,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Text_csv.png" class="img-fluid figure-img"></p>
-<figcaption>Figura 3</figcaption>
+<figcaption>Explorador de archivos: Ubicar el archivo .csv de datos</figcaption>
 </figure>
 </div>
 <ul>
@@ -532,7 +532,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/load_data.png" class="img-fluid figure-img"></p>
-<figcaption>Figura 4</figcaption>
+<figcaption>Botón Load: Confirmación de carga del archivo .csv en PowerBI</figcaption>
 </figure>
 </div>
 <p>A continuación explicaré paso a paso el código M que utilizamos para transformar datos en Power Query. Este script carga nuestro archivo CSV, promociona los encabezados, cambia los tipos de datos, agrega una columna personalizada concatenando un texto fijo con el valor existente en la columna <strong>REGION</strong>, y aplica una serie de reemplazos para corregir los nombres de las regiones de forma automatizada.</p>
@@ -542,7 +542,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Advance_editor.png" class="img-fluid figure-img"></p>
-<figcaption>Figura 4</figcaption>
+<figcaption>Botón Done en el Advanced Editor de Power Query para confirmar los cambios</figcaption>
 </figure>
 </div>
 <ul>
@@ -552,7 +552,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Code_M.png" class="img-fluid figure-img"></p>
-<figcaption>Figura 4</figcaption>
+<figcaption>Vista detallada del código M utilizado para transformar datos en Power Query</figcaption>
 </figure>
 </div>
 </section>
@@ -740,7 +740,7 @@ Si el valor en <strong>REGION</strong> es <code>"Metropolitana"</code>, el resul
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/format_visual.png" class="img-fluid figure-img"></p>
-<figcaption>Figura x</figcaption>
+<figcaption>Panel Format Visual en PowerBI mostrando opciones de formato</figcaption>
 </figure>
 </div>
 </section>
@@ -753,7 +753,7 @@ Si el valor en <strong>REGION</strong> es <code>"Metropolitana"</code>, el resul
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Total_casas_kpi.png" class="img-fluid figure-img"></p>
-<figcaption>Figura x</figcaption>
+<figcaption>Tarjeta de visualización: Total de Hogares sin Luz en PowerBI</figcaption>
 </figure>
 </div>
 </section>
@@ -786,47 +786,47 @@ Si el valor en <strong>REGION</strong> es <code>"Metropolitana"</code>, el resul
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Comparacion_ultima.png" class="img-fluid figure-img"></p>
-<figcaption>Figura 4</figcaption>
+<figcaption>Visual comparativa: Diferencia entre la última y la penúltima medición de clientes afectados</figcaption>
 </figure>
 </div>
 </section>
 <section id="porcentaje-hogares-sin-luz" class="level3">
 <h3 class="anchored" data-anchor-id="porcentaje-hogares-sin-luz">Porcentaje hogares sin luz</h3>
-<p>Con esta métrica podremos dimensionar la cantidad de hogares sin suministro eléctrico a nivel nacional. El total de hogares fue un dato que recogí del <a href="link">sitio web oficial</a></p>
+<p>Con esta métrica podremos dimensionar la cantidad de hogares sin suministro eléctrico a nivel nacional. El total de hogares fue un dato que recogí del <a href="https://www.sec.cl/interrupciones-en-linea/?view_full_site=true" target="_blank">SEC</a>. Si bien no está a primera vista, lo encontré con el modo desarrollador, específicamente en el método GetClientesNacional de la api, el cual entrega el número total de clientes nacional.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode m code-with-copy"><code class="sourceCode matlab"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="va">Porcentaje_Hogares_Sin_Luz</span> <span class="op">=</span> </span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="va">VAR</span> <span class="va">Total_Hogares</span> <span class="op">=</span> <span class="fl">6534588</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="va">VAR</span> <span class="va">Total_Hogares</span> <span class="op">=</span> <span class="fl">8156814</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="va">VAR</span> <span class="va">Total_Afectados</span> <span class="op">=</span> <span class="va">SUM</span>(<span class="va">clientes_afectados_tiempo_real</span>[<span class="va">Clientes_Afectados</span>])</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="va">RETURN</span> </span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">DIVIDE</span>(<span class="va">Total_Afectados</span><span class="op">,</span> <span class="va">Total_Hogares</span><span class="op">,</span> <span class="fl">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/proporcion_nacional.png" class="img-fluid figure-img"></p>
-<figcaption>Figura 4</figcaption>
+<figcaption>Tarjeta de porcentaje: Proporción de hogares sin suministro eléctrico a nivel nacional</figcaption>
 </figure>
 </div>
 </section>
 <section id="mapa-interactivo" class="level3">
 <h3 class="anchored" data-anchor-id="mapa-interactivo">Mapa Interactivo</h3>
-<p>Visitando mi <a href="link">repositorio</a> puedes descargar el archivo .topojson necesario para visualizar el mapa de Chile. Una vez descargado, necesitamos habilitar la opción de mapas de forma (Shape Map) en nuestro Powerbi:</p>
+<p>Visitando mi <a href="https://github.com/simonkey1/SEC" target="_blank">repositorio</a> puedes descargar el archivo llamado Mapa_Chile.json para visualizar nuestro mapa. Una vez descargado, necesitamos habilitar la opción de mapas de forma (Shape Map) en nuestro Powerbi:</p>
 <p>-<strong>En la esquina inferior izquierda de la sección File click en Options and settings y luego Options</strong> -<strong>Click en Preview Features y activamos el shape map visual</strong></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Shape.png" class="img-fluid figure-img"></p>
-<figcaption>Figura 4</figcaption>
+<figcaption>Mapa interactivo de Chile: Visualización de clientes afectados usando Shape Map en PowerBI</figcaption>
 </figure>
 </div>
 <p>Una vez activado lo introducimos con la interfaz gráfica seleccionando <strong>Shape map</strong> e introducimos como <strong>Location</strong> nuestra columna <strong>REGION_CORREGIDA</strong> que creamos antes y en <strong>Color saturation</strong> la sumatoria de los clientes afectados.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Mapa1.png" class="img-fluid figure-img"></p>
-<figcaption>Figura 4</figcaption>
+<figcaption>Mapa interactivo de Chile: Visualización de clientes afectados usando Shape Map en PowerBI</figcaption>
 </figure>
 </div>
 <p>Nos dirigimos a la pestaña <strong>visual</strong> del mapa y en <strong>map type</strong> seleccionamos <strong>Custom map</strong> y en <strong>Add a map type</strong> agregamos nuestro archivo json</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/mapa2.png" class="img-fluid figure-img"></p>
-<figcaption>Figura 4</figcaption>
+<figcaption>Configuración del Shape Map: Importación del archivo .topojson y asignación de ubicación y color en PowerBI</figcaption>
 </figure>
 </div>
 </section>
@@ -856,7 +856,7 @@ Si el valor en <strong>REGION</strong> es <code>"Metropolitana"</code>, el resul
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/TOP_3.png" class="img-fluid figure-img"></p>
-<figcaption>Figura 4</figcaption>
+<figcaption>Tarjeta informativa: Top 3 comunas con mayor cantidad de hogares afectados</figcaption>
 </figure>
 </div>
 </section>
@@ -866,7 +866,7 @@ Si el valor en <strong>REGION</strong> es <code>"Metropolitana"</code>, el resul
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/stacked_bar.png" class="img-fluid figure-img"></p>
-<figcaption>Figura 4</figcaption>
+<figcaption>Gráfico de barras agrupadas: Hogares sin luz por Región (con leyenda)</figcaption>
 </figure>
 </div>
 </section>
@@ -876,7 +876,7 @@ Si el valor en <strong>REGION</strong> es <code>"Metropolitana"</code>, el resul
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Hogares_region.png" class="img-fluid figure-img"></p>
-<figcaption>Figura 4</figcaption>
+<figcaption>Gráfico de barras: Hogares sin luz por Región (sin leyenda)</figcaption>
 </figure>
 </div>
 </section>

@@ -14,7 +14,7 @@ format:
 
 ## Introducción
 
-Hace poco descubrí la página de la Superintendecia de Electricidad y Combustibles (SEC). Me llamó la atención en particular su sección de métricas e información de los cortes de luz a nivel nacional, debido a que noté que hay un gran margen de mejora en su accesibilidad y visualización de los datos para el usuario.
+Hace poco descubrí la página de la Superintendecia de Electricidad y Combustibles (SEC). Me llamó la atención en particular su sección de métricas e información de los cortes de luz a nivel nacional, debido a que noté que hay un gran margen de mejora en su accesibilidad y visualización de los datos para el usuario. NOTA: Al principio de la página, en la esquina superior derecha hay un interruptor para cambiar entre modo claro/oscuro, recomiendo el segundo, saludos!
 
 
 
@@ -369,36 +369,36 @@ Para poder manipular nuestros datos en Powerbi hay que seguir estos sencillos pa
 
 - **Click en Get data from other sources**
 
-![Figura 1](images/get_data.png)
+![Captura de pantalla: Seleccionar la opción Text/CSV en PowerBI para importar datos](images/get_data.png)
 
 
 - **Seleccionamos Text/CSV**
 
-![Figura 3](images/select_csv.png)
+![Explorador de archivos: Ubicar el archivo .csv de datos](images/select_csv.png)
 
 
 - **Buscamos nuestro archivo .csv**
 
 
-![Figura 3](images/Text_csv.png)
+![Explorador de archivos: Ubicar el archivo .csv de datos](images/Text_csv.png)
 
 
 - **Click en Load**
 
-![Figura 4](images/load_data.png)
+![Botón Load: Confirmación de carga del archivo .csv en PowerBI](images/load_data.png)
 
 A continuación explicaré  paso a paso el código M que utilizamos para transformar datos en Power Query. Este script carga nuestro archivo CSV, promociona los encabezados, cambia los tipos de datos, agrega una columna personalizada concatenando un texto fijo con el valor existente en la columna **REGION**, y aplica una serie de reemplazos para corregir los nombres de las regiones de forma automatizada.
 
 
 - **En la sección Home click en Advanced Editor**
 
-![Figura 4](images/Advance_editor.png)
+![Botón Done en el Advanced Editor de Power Query para confirmar los cambios](images/Advance_editor.png)
 
 - **Copia y pega el código de más abajo**
 
 - **Click en Done**
 
-![Figura 4](images/Code_M.png)
+![Vista detallada del código M utilizado para transformar datos en Power Query](images/Code_M.png)
 
 # Código M
 
@@ -612,7 +612,7 @@ Con esta medida podremos construir una *card* con la hora actual que corresponde
 - ***Data Format***
 - **en *Format option* buscaremos el formato *long Time***
 
-![Figura x](images/format_visual.png)
+![Panel Format Visual en PowerBI mostrando opciones de formato](images/format_visual.png)
 
 ### Total de Hogares sin Luz
 
@@ -620,7 +620,7 @@ Es una buena práctica crear las medidas explícitamente, es decir, introducir e
 
 - **Seleccionamos una *card* y arrastramos CLIENTES_AFECTADOS a *field***
 
-![Figura x](images/Total_casas_kpi.png)
+![Tarjeta de visualización: Total de Hogares sin Luz en PowerBI](images/Total_casas_kpi.png)
 
 ### Comparación última medición
 
@@ -654,40 +654,40 @@ Básicamente esta medida crea 4 variables:
 A través de estas podemos obtener la variación nominal de los hogares afectados respecto a la medición anterior
 
 
-![Figura 4](images/Comparacion_ultima.png)
+![Visual comparativa: Diferencia entre la última y la penúltima medición de clientes afectados](images/Comparacion_ultima.png)
 
 ### Porcentaje hogares sin luz
 
-Con esta métrica podremos dimensionar la cantidad de hogares sin suministro eléctrico a nivel nacional. El total de hogares fue un dato que recogí del  [sitio web oficial](link)
+Con esta métrica podremos dimensionar la cantidad de hogares sin suministro eléctrico a nivel nacional. El total de hogares fue un dato que recogí del  [SEC](https://www.sec.cl/interrupciones-en-linea/?view_full_site=true){target="_blank"}. Si bien no está a primera vista, lo encontré con el modo desarrollador, específicamente en el  método GetClientesNacional de la api, el cual entrega el número total de clientes nacional.
 
 ```m
 Porcentaje_Hogares_Sin_Luz = 
-VAR Total_Hogares = 6534588
+VAR Total_Hogares = 8156814
 VAR Total_Afectados = SUM(clientes_afectados_tiempo_real[Clientes_Afectados])
 RETURN 
     DIVIDE(Total_Afectados, Total_Hogares, 0)
 
 ```
 
-![Figura 4](images/proporcion_nacional.png)
+![Tarjeta de porcentaje: Proporción de hogares sin suministro eléctrico a nivel nacional](images/proporcion_nacional.png)
 
 ### Mapa Interactivo
 
-Visitando mi [repositorio](link) puedes descargar el archivo .topojson necesario para visualizar el mapa de Chile. Una vez descargado, necesitamos habilitar la opción de mapas de forma (Shape Map) en nuestro Powerbi:
+Visitando mi [repositorio](https://github.com/simonkey1/SEC){target="_blank"} puedes descargar el archivo llamado Mapa_Chile.json para visualizar nuestro mapa. Una vez descargado, necesitamos habilitar la opción de mapas de forma (Shape Map) en nuestro Powerbi:
 
  -**En la esquina inferior izquierda de la sección File click en Options and settings y luego Options**
  -**Click en Preview Features y activamos el shape map visual**
 
-![Figura 4](images/Shape.png)
+![Mapa interactivo de Chile: Visualización de clientes afectados usando Shape Map en PowerBI](images/Shape.png)
 
 
 Una vez activado lo introducimos con la interfaz gráfica seleccionando **Shape map** e introducimos como **Location** nuestra columna **REGION_CORREGIDA** que creamos antes y en **Color saturation** la sumatoria de los clientes afectados. 
 
-![Figura 4](images/Mapa1.png)
+![Mapa interactivo de Chile: Visualización de clientes afectados usando Shape Map en PowerBI](images/Mapa1.png)
 
 Nos dirigimos a la pestaña **visual** del mapa y en **map type** seleccionamos **Custom map** y en **Add a map type** agregamos nuestro archivo json
 
-![Figura 4](images/mapa2.png)
+![Configuración del Shape Map: Importación del archivo .topojson y asignación de ubicación y color en PowerBI](images/mapa2.png)
 
 ### Top 3 Comunas
 
@@ -718,19 +718,19 @@ RETURN
 
 ```
 
-![Figura 4](images/TOP_3.png)
+![Tarjeta informativa: Top 3 comunas con mayor cantidad de hogares afectados](images/TOP_3.png)
 
 ### Hogares sin Luz por Región
 
 Este gráfico se crea con una visual de *Stacked bar chart*. Utilicé en el eje y las Comunas, en el X la sumatoria de clientes afectados y la leyenda son las empresas eléctricas
 
-![Figura 4](images/stacked_bar.png)
+![Gráfico de barras agrupadas: Hogares sin luz por Región (con leyenda)](images/stacked_bar.png)
 
 ### Hogares sin luz por Región
 
 Es una visualización tipo *#Clustered bar chart#* similar al anterior con la diferencia que ahora es por Regiones y sin leyenda
 
-![Figura 4](images/Hogares_region.png)
+![Gráfico de barras: Hogares sin luz por Región (sin leyenda)](images/Hogares_region.png)
 
 ### Filtro por Región
 

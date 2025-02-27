@@ -12,3 +12,4 @@ format:
       light: cerulean
       dark: darkly
     dark-mode: true         # Activa el toggle de Quarto  # Tu CSS personalizado
+    link-target: _blank
