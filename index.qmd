@@ -9,7 +9,8 @@ format:
     code-overflow: scroll
     theme: cerulean
     toc: True
-    image: "https://github.com/simonkey1/power_bi/blob/master/images/575shots_so.png?raw=true"
+    
+
     
 ---
 

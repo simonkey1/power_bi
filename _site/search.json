@@ -7,13 +7,6 @@
     "text": "Hace poco descubrí la página de la Superintendecia de Electricidad y Combustibles (SEC). Me llamó la atención en particular su sección de métricas e información de los cortes de luz a nivel nacional, debido a que noté que hay un gran margen de mejora en su accesibilidad y visualización de los datos para el usuario. NOTA: Al principio de la página, en la esquina superior derecha hay un interruptor para cambiar entre modo claro/oscuro, recomiendo el segundo, saludos!"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n\nCode\n1 + 1\n\n\n[1] 2"
-  },
-  {
     "objectID": "index.html#introducción",
     "href": "index.html#introducción",
     "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
@@ -26,6 +19,13 @@
     "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
     "section": "¿Qué haremos?",
     "text": "¿Qué haremos?\n\nPreparar nuestro entorno: primero, instalaremos las dependencias necesarias para el proyecto.\nExtracción de los datos: aprenderemos a realizar web scraping con Playwright.\nTransformación de los datos: necesitaremos limpiar y procesar los datos extraídos con Pandas.\nVisualización de los datos: finalmente, visualizaremos los datos en Powerbi.\n\n\n\n\nFlujo de Trabajo Teórico\n\n\nComo señala el flujo, empezamos por la Api de la SEC a través de python, luego pasamos a powerbi para terminar las trasnformación y la posterior visualización"
+  },
+  {
+    "objectID": "index.html#aclaración",
+    "href": "index.html#aclaración",
+    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
+    "section": "Aclaración 🔴",
+    "text": "Aclaración 🔴\nSi bien creamos una base histórica, esta es parte de otro proyecto independiente, donde tendremos un enfoque diferente con visualizaciones propias. Mantuve el flujo original ya que igualmente lo utilizaremos para una medida, además que nos irá acumulando los datos desde el momento que empezamos la iteración. De todas maneras, si deseas no utilizar esta base, basta con eliminar la parte del código donde la creamos."
   },
   {
     "objectID": "index.html#entorno-de-desarrollo",
@@ -84,46 +84,18 @@
     "text": "🔁 Automatización Cada 5 Minutos\nwhile True:\n    intercept_responses()\n    print(\"⏳ Esperando 5 minutos para la siguiente ejecución...\\n\")\n    time.sleep(5 * 60)  # 5 minutos en segundos\n📌 ¿Qué hace esto?\n\nEjecuta intercept_responses() en un bucle infinito.\nEspera 5 minutos (time.sleep(5 * 60)) antes de volver a ejecutar la función.\n\nPuedes elegir el tiempo que desees, yo decidí 5 minutos."
   },
   {
-    "objectID": "index.html#felicidades",
-    "href": "index.html#felicidades",
+    "objectID": "index.html#extra",
+    "href": "index.html#extra",
     "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
-    "section": "Felicidades⭐!",
-    "text": "Felicidades⭐!\nYa tenemos nuestra base de datos casi lista para su visualización. Si bien podríamos terminar de darle formato a los datos directamente con pandas, es una perfecta ocasión para hacerlo en powerbi, ya que podremos visualizar con facilidad los cambios que iremos realizando para construir nuestro dashboard interactivo."
+    "section": "Extra",
+    "text": "Extra\nEsta es una manera de automatizar, no obstante, también puedes utilizar el programador de tareas en Windows y ejecutar un .bat que contenga la ejecución del .py. Si lo ejecutas, no es necesario mantener el código de loop de arriba, ya que el programador lo puedes configurar con intervalos de tiempo.\n@echo off\ncd C:\\Users\\SIMON\\Desktop\\Kaggle\\luz\npython end.py\nexit\n\nFelicidades⭐!\nYa tenemos nuestra base de datos casi lista para su visualización. Si bien podríamos terminar de darle formato a los datos directamente con pandas, es una perfecta ocasión para hacerlo en powerbi, ya que podremos visualizar con facilidad los cambios que iremos realizando para construir nuestro dashboard interactivo.\n\n\nAclaración 🔴\nEste no es un tutorial de cómo utilizar PowerBI, por lo que es necesario saber lo básico para poder seguir el tutorial: instalación, configuración, comandos, etc."
   },
   {
-    "objectID": "index.html#powerbi-utilizar-nuestro-archivo-.csv",
-    "href": "index.html#powerbi-utilizar-nuestro-archivo-.csv",
+    "objectID": "index.html#explicación-del-código-m",
+    "href": "index.html#explicación-del-código-m",
     "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
-    "section": "Powerbi: utilizar nuestro archivo .csv ",
-    "text": "Powerbi: utilizar nuestro archivo .csv"
-  },
-  {
-    "objectID": "index.html#aclaración",
-    "href": "index.html#aclaración",
-    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
-    "section": "Aclaración 🔴",
-    "text": "Aclaración 🔴\nSi bien creamos una base histórica, esta es parte de otro proyecto independiente, donde tendremos un enfoque diferente con visualizaciones propias. Mantuve el flujo original ya que igualmente lo utilizaremos para una medida, además que nos irá acumulando los datos desde el momento que empezamos la iteración. De todas maneras, si deseas no utilizar esta base, basta con eliminar la parte del código donde la creamos."
-  },
-  {
-    "objectID": "index.html#powerbi-carga-de-datos",
-    "href": "index.html#powerbi-carga-de-datos",
-    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
-    "section": "Powerbi: carga de datos",
-    "text": "Powerbi: carga de datos\nDependiendo de la carpeta donde hayamos realizado nuestro proyecto, podremos encontrar el archivo resultante, el cual utilizaremos ahora.\nPara poder manipular nuestros datos en Powerbi hay que seguir unos pasos sencillos:\n\nAbrir PowerBI\nClick en Get data from other sources\nSeleccionamos Text/CSV\nBuscamos nuestro archivo .csv\n\nUna vez realizado estos pasos, nos aparecerá una ventana emergente, donde presionaremos en Transform Data. A través de esta hoja de cálculo podremos completar los requerimientos para poder visualizar nuestro mapa de Chile por regiones. Estos son:\n\nOrdenar de mayor a menor los cortes de luz\nConstruir una nueva columna llamada Region_Corregida a partir de nuestra variable región\nRenombrar cada región de esta columna con los nombres del archivo topojson(mapa)\n\nPara ordenar de manera descendiente los clientes afectados, los pasos son similares a excel:\n\nClick en la columna clientes_afectados\nOrdenar de mayor a menor\nCerramos el menú\n\n\nNueva columna región corregida\nEn el menú principal buscamos la sección Add column, y clickeamos en Custom column, Luego ponemos el siguiente código:\n= Table.AddColumn(#\"Sorted Rows\", \"Region_Corregida\", each \"Región de \" & [REGION])\n\n📌 ¿Qué hace esto?\n\nTable.AddColumn → Función que agrega una nueva columna a una tabla existente.\n#“Sorted Rows” → Nombre de nuestra base ya ordenada (paso anterior) en la que se está agregando la nueva columna.\n“Region_Corregida” → Nombre de la nueva columna que se está creando.\neach “Región de” & [REGION] → Expresión que se evalúa para cada fila:\n“Región de” → Texto fijo.\n[REGION] → Columna existente en la tabla, cuyos valores se concatenan con el texto fijo.\n\n\n\nHola"
-  },
-  {
-    "objectID": "index.html#nueva-columna-región-corregida",
-    "href": "index.html#nueva-columna-región-corregida",
-    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
-    "section": "Nueva columna región corregida",
-    "text": "Nueva columna región corregida\nEn el menú principal buscamos la sección Add column, y clickeamos en Custom column, Luego ponemos el siguiente código:\n= Table.AddColumn(#\"Sorted Rows\", \"Region_Corregida\", each \"Región de \" & [REGION])\n📌 ¿Qué hace esto?\n\nTable.AddColumn → Función que agrega una nueva columna a una tabla existente.\n#“Sorted Rows” → Nombre de nuestra base ya ordenada (paso anterior) en la que se está agregando la nueva columna.\n“Region_Corregida” → Nombre de la nueva columna que se está creando.\neach “Región de” & [REGION] → Expresión que se evalúa para cada fila:\n“Región de” → Texto fijo.\n[REGION] → Columna existente en la tabla, cuyos valores se concatenan con el texto fijo."
-  },
-  {
-    "objectID": "index.html#hola",
-    "href": "index.html#hola",
-    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
-    "section": "Hola",
-    "text": "Hola"
+    "section": "Explicación del código M",
+    "text": "Explicación del código M\nA continuación, desglosamos cada parte del código para comprender su funcionamiento."
   },
   {
     "objectID": "index.html#cargar-el-archivo-csv-y-promover-encabezados",
@@ -154,48 +126,6 @@
     "text": "📌 Aplicar Reemplazos de Forma Acumulativa\n\nDefinición de la Lista de Reemplazos\nReemplazos = {\n    {\"Región de Metropolitana\", \"Región Metropolitana de Santiago\"},\n    {\"Región de Tarapaca\", \"Región de Tarapacá\"},\n    {\"Región de Magallanes\", \"Región de Magallanes y Antártica Chilena\"},\n    {\"Región de Aysén\", \"Región de Aysén del Gral.Ibañez del Campo\"},\n    {\"Región de O`Higgins\", \"Región del Libertador Bernardo O'Higgins\"},\n    {\"Región de Biobio\", \"Región del Bío-Bío\"},\n    {\"Región de La Araucania\", \"Región de La Araucanía\"},\n    {\"Región de Los Rios\", \"Región de los Ríos\"},\n    {\"Región de Valparaiso\", \"Región de Valparaíso\"},\n    {\"Región de Maule\", \"Región del Maule\"}\n}\n¿Qué hace esto?\n\nSe define una lista de pares, donde cada par contiene:\n\nTexto original: Valor que aparece en la columna REGION_CORREGIDA.\nTexto corregido: Valor con el que se reemplazará el texto original.\n\n\n\n\nAplicación de los Reemplazos con List.Accumulate\nResultado = List.Accumulate(\n    Reemplazos,\n    #\"Added Custom\",\n    (tabla, par) =&gt; Table.ReplaceValue(\n        tabla,\n        par{0},\n        par{1},\n        Replacer.ReplaceText,\n        {\"REGION_CORREGIDA\"}\n    )\n)\n¿Qué hace esto?\n\nList.Accumulate: Itera sobre cada par de la lista Reemplazos.\n#“Added Custom”: Es el paso inicial que contiene la tabla con la nueva columna REGION_CORREGIDA.\nTable.ReplaceValue: En cada iteración, reemplaza el valor par{0} (texto original) por par{1} (texto corregido) en la columna REGION_CORREGIDA.\nEl proceso es acumulativo: cada reemplazo se aplica sobre el resultado del reemplazo anterior."
   },
   {
-    "objectID": "index.html#tarjetas",
-    "href": "index.html#tarjetas",
-    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
-    "section": "Tarjetas,",
-    "text": "Tarjetas,\nEn este post explicaré paso a paso el código M que utilizamos para transformar datos en Power Query. Este script carga un archivo CSV, promociona los encabezados, cambia los tipos de datos, agrega una columna personalizada concatenando un texto fijo con el valor existente en la columna REGION, y aplica una serie de reemplazos para corregir los nombres de las regiones de forma automatizada."
-  },
-  {
-    "objectID": "index.html#construcción-de-métricas-el-mapa-interactivo-y-gráficos",
-    "href": "index.html#construcción-de-métricas-el-mapa-interactivo-y-gráficos",
-    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
-    "section": "Construcción de métricas, el mapa interactivo y gráficos",
-    "text": "Construcción de métricas, el mapa interactivo y gráficos"
-  },
-  {
-    "objectID": "index.html#powerquery",
-    "href": "index.html#powerquery",
-    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
-    "section": "PowerQuery",
-    "text": "PowerQuery\nlet\n    // Cargar archivo CSV y promover encabezados\n    Source = Csv.Document(\n        File.Contents(\"C:\\Users\\SIMON\\Desktop\\Kaggle\\luz\\power_bi\\clientes_afectados_tiempo_real.csv\"),\n        [Delimiter=\",\", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]\n    ),\n    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n    \n    // Cambiar tipos de datos\n    #\"Changed Type\" = Table.TransformColumnTypes(\n        #\"Promoted Headers\",\n        {\n            {\"ID_UNICO\", type text}, \n            {\"TIMESTAMP\", type datetime}, \n            {\"HORA_EXACTA_REPORTE\", type datetime}, \n            {\"FECHA\", type date}, \n            {\"REGION\", type text}, \n            {\"COMUNA\", type text}, \n            {\"EMPRESA\", type text}, \n            {\"CLIENTES_AFECTADOS\", Int64.Type}, \n            {\"ACTUALIZADO_HACE\", type text}\n        }\n    ),\n    \n    // Agregar columna REGION_CORREGIDA concatenando \"Región de \" con el valor de REGION\n    #\"Added Custom\" = Table.AddColumn(\n        #\"Changed Type\",\n        \"REGION_CORREGIDA\",\n        each \"Región de \" & [REGION]\n    ),\n    \n    // Lista de reemplazos para la columna REGION_CORREGIDA\n    Reemplazos = {\n        {\"Región de Metropolitana\", \"Región Metropolitana de Santiago\"},\n        {\"Región de Tarapaca\", \"Región de Tarapacá\"},\n        {\"Región de Magallanes\", \"Región de Magallanes y Antártica Chilena\"},\n        {\"Región de Aysén\", \"Región de Aysén del Gral.Ibañez del Campo\"},\n        {\"Región de O`Higgins\", \"Región del Libertador Bernardo O'Higgins\"},\n        {\"Región de Biobio\", \"Región del Bío-Bío\"},\n        {\"Región de La Araucania\", \"Región de La Araucanía\"},\n        {\"Región de Los Rios\", \"Región de los Ríos\"},\n        {\"Región de Valparaiso\", \"Región de Valparaíso\"},\n        {\"Región de Maule\", \"Región del Maule\"}\n    },\n\n    // Aplicar reemplazos a REGION_CORREGIDA de forma acumulativa\n    Resultado = List.Accumulate(\n        Reemplazos,\n        #\"Added Custom\",\n        (tabla, par) =&gt; Table.ReplaceValue(\n            tabla,\n            par{0},\n            par{1},\n            Replacer.ReplaceText,\n            {\"REGION_CORREGIDA\"}\n        )\n    )\nin\n    Resultado"
-  },
-  {
-    "objectID": "index.html#análisis-del-código-m",
-    "href": "index.html#análisis-del-código-m",
-    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
-    "section": "Análisis del código M",
-    "text": "Análisis del código M\nGeneralmente tienes dos maneras de realizar las transformaciones con Power Query: con interfaz gráfica y con código. Para simplificar el proceso, utilizaremos el siguiente código que nos permitirá dejar lista la base para pasar a los diagramas. Repasaremos cada línea de código. Si quieres pasar directamente a la visualización, puedes omitir esta parte."
-  },
-  {
-    "objectID": "index.html#explicación-del-código-m",
-    "href": "index.html#explicación-del-código-m",
-    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
-    "section": "Explicación del código M",
-    "text": "Explicación del código M\nA continuación, desglosamos cada parte del código para comprender su funcionamiento."
-  },
-  {
-    "objectID": "index.html#medidas",
-    "href": "index.html#medidas",
-    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
-    "section": "Medidas",
-    "text": "Medidas\nEn PowerBi utilizamos una herramienta llamada medida, con esta podemos realizar cálculos utilizando la sintaxis adecuada, lo que permite construir métricas a partir de nuestros datos\n\nÚltima Actualización\n\nÚltima Actualización = MAX('clientes_afectados_historico'[TIMESTAMP])   \nCon esta medida podremos construir una card con la hora actual que corresponde la información. Esta por defecto incluye fechas, vamos a corregirlo:\n\nClick en Format Visual en el menú de la derecha\nGeneral\nData Format\nen Format option buscaremos el formato long Time\n\n\n\n\nFigura x\n\n\n\n\nTotal de Hogares sin Luz\nEs una buena práctica crear las medidas explícitamente, es decir, introducir el código de lo que queremos que haga nuestra medida. Para efectos prácticos, utilizaremos la medida implícita de sumatoria que nos ofrece PowerBi:\n\nSeleccionamos una card y arrastramos CLIENTES_AFECTADOS a field\n\n\n\n\nFigura x\n\n\n\n\nComparación última medición\nComparación última medición = \nVAR ultimoTiempo = MAX(clientes_afectados_tiempo_real[TIMESTAMP])\nVAR PenultimoTiempo = \n    CALCULATE(MAX(clientes_afectados_tiempo_real[TIMESTAMP]), \n              clientes_afectados_tiempo_real[TIMESTAMP] &lt; ultimoTiempo)\n\nVAR Afectados_Ultima =\n    CALCULATE(SUM(clientes_afectados_tiempo_real[CLIENTES_AFECTADOS]), \n              clientes_afectados_tiempo_real[TIMESTAMP] = ultimoTiempo)\n\nVAR Afectados_Anterior =\n    CALCULATE(SUM(clientes_afectados_tiempo_real[CLIENTES_AFECTADOS]), \n              clientes_afectados_tiempo_real[TIMESTAMP] = PenultimoTiempo)\n\nRETURN\n    Afectados_Ultima - Afectados_Anterior\n\nBásicamente esta medida crea 4 variables:\n\nultimoTiempo -&gt; el tiempo más reciente\nPenultimoTiempo -&gt; medición pasada\nAfectados_Ultima -&gt; total de hogares afectados más reciente\nAfectados_Anterior -&gt; total de hogares afectados de la medición anterior\n\nA través de estas podemos obtener la variación nominal de los hogares afectados respecto a la medición anterior\n\n\n\nFigura 4\n\n\n\n\nPorcentaje hogares sin luz\nCon esta métrica podremos dimensionar la cantidad de hogares sin suministro eléctrico a nivel nacional. El total de hogares fue un dato que recogí del sitio web oficial\nPorcentaje_Hogares_Sin_Luz = \nVAR Total_Hogares = 6534588\nVAR Total_Afectados = SUM(clientes_afectados_tiempo_real[Clientes_Afectados])\nRETURN \n    DIVIDE(Total_Afectados, Total_Hogares, 0)\n\n\n\n\nFigura 4\n\n\n\n\nMapa Interactivo\nVisitando mi repositorio puedes descargar el archivo .topojson necesario para visualizar el mapa de Chile. Una vez descargado, necesitamos habilitar la opción de mapas de forma (Shape Map) en nuestro Powerbi:\n-En la esquina inferior izquierda de la sección File click en Options and settings y luego Options -Click en Preview Features y activamos el shape map visual\n\n\n\nFigura 4\n\n\nUna vez activado lo introducimos con la interfaz gráfica seleccionando Shape map e introducimos como Location nuestra columna REGION_CORREGIDA que creamos antes y en Color saturation la sumatoria de los clientes afectados.\n\n\n\nFigura 4\n\n\nNos dirigimos a la pestaña visual del mapa y en map type seleccionamos Custom map y en Add a map type agregamos nuestro archivo json\n\n\n\nFigura 4\n\n\n\n\nTop 3 Comunas\nYa sabes cómo agregar una medida, por lo que te proporciono el código para obtener una tarjeta que nos informe en top 3 actual de las comunas con mayor cantidad de hogares afectados.\nTOP3_Comunas = \nVAR ComunasFiltradas =\n    FILTER(\n        ALL(clientes_afectados_tiempo_real), \n        clientes_afectados_tiempo_real[Region_Corregida] IN VALUES(clientes_afectados_tiempo_real[Region_Corregida])\n    )\n\nVAR ComunasGrouped =\n    SUMMARIZE(\n        ComunasFiltradas, \n        clientes_afectados_tiempo_real[Comuna],\n        \"@Clientes_Afectados\", SUM(clientes_afectados_tiempo_real[Clientes_Afectados])\n    )\n\nVAR ComunasRanked =\n    TOPN(3, ComunasGrouped, [@Clientes_Afectados], DESC)\n\nRETURN\n    CONCATENATEX(ComunasRanked, clientes_afectados_tiempo_real[Comuna], \", \")\n\n\n\n\n\nFigura 4\n\n\n\n\nHogares sin Luz por Región\nEste gráfico se crea con una visual de Stacked bar chart. Utilicé en el eje y las Comunas, en el X la sumatoria de clientes afectados y la leyenda son las empresas eléctricas\n\n\n\nFigura 4\n\n\n\n\nHogares sin luz por Región\nEs una visualización tipo #Clustered bar chart# similar al anterior con la diferencia que ahora es por Regiones y sin leyenda\n\n\n\nFigura 4\n\n\n\n\nFiltro por Región\nEsta es una elección mía, podrías hacer filtros por comunas si deseas, incluso provincias si creas la columna. Lo utilicé con la interfaz gráfica, en la opción Filtro y en field las regiones, no la corregida, ya que son muy largos los nombres.\n\n\nListo!\nFelicidades, si llegaste hasta acá tienes un dashboard en condiciones, ¿cierto? Pues no necesariamente. Es funcional, pero requiere de un estilado personalizado para verse más atráctivo y que llame la atención. Decidí no hacer un tutorial de esto ya que mi enfoque principal no es hacer un tutorial a fondo de PowerBI. De hecho, no hice grandes cambios, simplemente estandaricé las fuentes, tamaños, colores, títulos y poco más. Te puedo señalar que es muy importante que hayan buenos contrastes, que las letras sean legibles y que no hayan tantos colores: menos es más. De todas maneras, podrás utilizar mi proyecto como plantilla para estilarlo a tu manera."
-  },
-  {
     "objectID": "index.html#construcción-de-métricas-el-mapa-interactivo-filtro-y-gráficos",
     "href": "index.html#construcción-de-métricas-el-mapa-interactivo-filtro-y-gráficos",
     "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
@@ -203,10 +133,10 @@
     "text": "Construcción de métricas, el mapa interactivo, filtro y gráficos\nEn PowerBi utilizamos una herramienta llamada medida, con esta podemos realizar cálculos utilizando la sintaxis adecuada, lo que permite construir métricas a partir de nuestros datos\n\nÚltima Actualización\n\nÚltima Actualización = MAX('clientes_afectados_historico'[TIMESTAMP])   \nCon esta medida podremos construir una card con la hora actual que corresponde la información. Esta por defecto incluye fechas, vamos a corregirlo:\n\nClick en Format Visual en el menú de la derecha\nGeneral\nData Format\nen Format option buscaremos el formato long Time\n\n\n\n\nPanel Format Visual en PowerBI mostrando opciones de formato\n\n\n\n\nTotal de Hogares sin Luz\nEs una buena práctica crear las medidas explícitamente, es decir, introducir el código de lo que queremos que haga nuestra medida. Para efectos prácticos, utilizaremos la medida implícita de sumatoria que nos ofrece PowerBi:\n\nSeleccionamos una card y arrastramos CLIENTES_AFECTADOS a field\n\n\n\n\nTarjeta de visualización: Total de Hogares sin Luz en PowerBI\n\n\n\n\nComparación última medición\nComparación última medición = \nVAR ultimoTiempo = MAX(clientes_afectados_tiempo_real[TIMESTAMP])\nVAR PenultimoTiempo = \n    CALCULATE(MAX(clientes_afectados_tiempo_real[TIMESTAMP]), \n              clientes_afectados_tiempo_real[TIMESTAMP] &lt; ultimoTiempo)\n\nVAR Afectados_Ultima =\n    CALCULATE(SUM(clientes_afectados_tiempo_real[CLIENTES_AFECTADOS]), \n              clientes_afectados_tiempo_real[TIMESTAMP] = ultimoTiempo)\n\nVAR Afectados_Anterior =\n    CALCULATE(SUM(clientes_afectados_tiempo_real[CLIENTES_AFECTADOS]), \n              clientes_afectados_tiempo_real[TIMESTAMP] = PenultimoTiempo)\n\nRETURN\n    Afectados_Ultima - Afectados_Anterior\nBásicamente esta medida crea 4 variables:\n\nultimoTiempo -&gt; el tiempo más reciente\nPenultimoTiempo -&gt; medición pasada\nAfectados_Ultima -&gt; total de hogares afectados más reciente\nAfectados_Anterior -&gt; total de hogares afectados de la medición anterior\n\nA través de estas podemos obtener la variación nominal de los hogares afectados respecto a la medición anterior\n\n\n\nVisual comparativa: Diferencia entre la última y la penúltima medición de clientes afectados\n\n\n\n\nPorcentaje hogares sin luz\nCon esta métrica podremos dimensionar la cantidad de hogares sin suministro eléctrico a nivel nacional. El total de hogares fue un dato que recogí del SEC. Si bien no está a primera vista, lo encontré con el modo desarrollador, específicamente en el método GetClientesNacional de la api, el cual entrega el número total de clientes nacional.\nPorcentaje_Hogares_Sin_Luz = \nVAR Total_Hogares = 8156814\nVAR Total_Afectados = SUM(clientes_afectados_tiempo_real[Clientes_Afectados])\nRETURN \n    DIVIDE(Total_Afectados, Total_Hogares, 0)\n\n\n\nTarjeta de porcentaje: Proporción de hogares sin suministro eléctrico a nivel nacional\n\n\n\n\nMapa Interactivo\nVisitando mi repositorio puedes descargar el archivo llamado Mapa_Chile.json para visualizar nuestro mapa. Una vez descargado, necesitamos habilitar la opción de mapas de forma (Shape Map) en nuestro Powerbi:\n-En la esquina inferior izquierda de la sección File click en Options and settings y luego Options -Click en Preview Features y activamos el shape map visual\n\n\n\nMapa interactivo de Chile: Visualización de clientes afectados usando Shape Map en PowerBI\n\n\nUna vez activado lo introducimos con la interfaz gráfica seleccionando Shape map e introducimos como Location nuestra columna REGION_CORREGIDA que creamos antes y en Color saturation la sumatoria de los clientes afectados.\n\n\n\nMapa interactivo de Chile: Visualización de clientes afectados usando Shape Map en PowerBI\n\n\nNos dirigimos a la pestaña visual del mapa y en map type seleccionamos Custom map y en Add a map type agregamos nuestro archivo json\n\n\n\nConfiguración del Shape Map: Importación del archivo .topojson y asignación de ubicación y color en PowerBI\n\n\n\n\nTop 3 Comunas\nYa sabes cómo agregar una medida, por lo que te proporciono el código para obtener una tarjeta que nos informe en top 3 actual de las comunas con mayor cantidad de hogares afectados.\nTOP3_Comunas = \nVAR ComunasFiltradas =\n    FILTER(\n        ALL(clientes_afectados_tiempo_real), \n        clientes_afectados_tiempo_real[Region_Corregida] IN VALUES(clientes_afectados_tiempo_real[Region_Corregida])\n    )\n\nVAR ComunasGrouped =\n    SUMMARIZE(\n        ComunasFiltradas, \n        clientes_afectados_tiempo_real[Comuna],\n        \"@Clientes_Afectados\", SUM(clientes_afectados_tiempo_real[Clientes_Afectados])\n    )\n\nVAR ComunasRanked =\n    TOPN(3, ComunasGrouped, [@Clientes_Afectados], DESC)\n\nRETURN\n    CONCATENATEX(ComunasRanked, clientes_afectados_tiempo_real[Comuna], \", \")\n\n\n\n\nTarjeta informativa: Top 3 comunas con mayor cantidad de hogares afectados\n\n\n\n\nHogares sin Luz por Región\nEste gráfico se crea con una visual de Stacked bar chart. Utilicé en el eje y las Comunas, en el X la sumatoria de clientes afectados y la leyenda son las empresas eléctricas\n\n\n\nGráfico de barras agrupadas: Hogares sin luz por Región (con leyenda)\n\n\n\n\nHogares sin luz por Región\nEs una visualización tipo #Clustered bar chart# similar al anterior con la diferencia que ahora es por Regiones y sin leyenda\n\n\n\nGráfico de barras: Hogares sin luz por Región (sin leyenda)\n\n\n\n\nFiltro por Región\nEsta es una elección mía, podrías hacer filtros por comunas si deseas, incluso provincias si creas la columna. Lo utilicé con la interfaz gráfica, en la opción Filtro y en field las regiones, no la corregida, ya que son muy largos los nombres.\n\n\nListo!\nFelicidades, si llegaste hasta acá tienes un dashboard en condiciones, ¿cierto? Pues no necesariamente. Es funcional, pero requiere de un estilado personalizado para verse más atráctivo y que llame la atención. Decidí no hacer un tutorial de esto ya que mi enfoque principal no es hacer un tutorial a fondo de PowerBI. De hecho, no hice grandes cambios, simplemente estandaricé las fuentes, tamaños, colores, títulos y poco más. Te puedo señalar que es muy importante que hayan buenos contrastes, que las letras sean legibles y que no hayan tantos colores: menos es más. De todas maneras, podrás utilizar mi proyecto como plantilla para estilarlo a tu manera."
   },
   {
-    "objectID": "index.html#extra",
-    "href": "index.html#extra",
-    "title": "⚡ Análisis en Tiempo Real del Suministro Eléctrico de Chile ⚡",
-    "section": "Extra",
-    "text": "Extra\nEsta es una manera de automatizar, no obstante, también puedes utilizar el programador de tareas en Windows y ejecutar un .bat que contenga la ejecución del .py. Si lo ejecutas, no es necesario mantener el código de loop de arriba, ya que el programador lo puedes configurar con intervalos de tiempo.\n@echo off\ncd C:\\Users\\SIMON\\Desktop\\Kaggle\\luz\npython end.py\nexit\n\nFelicidades⭐!\nYa tenemos nuestra base de datos casi lista para su visualización. Si bien podríamos terminar de darle formato a los datos directamente con pandas, es una perfecta ocasión para hacerlo en powerbi, ya que podremos visualizar con facilidad los cambios que iremos realizando para construir nuestro dashboard interactivo.\n\n\nAclaración 🔴\nEste no es un tutorial de cómo utilizar PowerBI, por lo que es necesario saber lo básico para poder seguir el tutorial: instalación, configuración, comandos, etc."
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n\nCode\n1 + 1\n\n\n[1] 2"
   }
 ]
